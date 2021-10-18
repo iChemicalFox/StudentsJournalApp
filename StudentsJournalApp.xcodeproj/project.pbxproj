@@ -7,66 +7,76 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		02828959271DC23500C91B40 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02828958271DC23500C91B40 /* AppDelegate.swift */; };
-		0282895B271DC23500C91B40 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0282895A271DC23500C91B40 /* SceneDelegate.swift */; };
-		0282895D271DC23500C91B40 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0282895C271DC23500C91B40 /* ViewController.swift */; };
-		02828960271DC23500C91B40 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0282895E271DC23500C91B40 /* Main.storyboard */; };
-		02828962271DC23800C91B40 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 02828961271DC23800C91B40 /* Assets.xcassets */; };
-		02828965271DC23800C91B40 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 02828963271DC23800C91B40 /* LaunchScreen.storyboard */; };
-		02828970271DC23900C91B40 /* StudentsJournalAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0282896F271DC23900C91B40 /* StudentsJournalAppTests.swift */; };
-		0282897A271DC23900C91B40 /* StudentsJournalAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02828979271DC23900C91B40 /* StudentsJournalAppUITests.swift */; };
-		0282897C271DC23900C91B40 /* StudentsJournalAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0282897B271DC23900C91B40 /* StudentsJournalAppUITestsLaunchTests.swift */; };
+		02668A6F271077510023A331 /* SubjectsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02668A6E271077510023A331 /* SubjectsTableViewController.swift */; };
+		02828948271DB3AB00C91B40 /* JournalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02828947271DB3AB00C91B40 /* JournalCell.swift */; };
+		028B7B8B2709C61D0028C1B7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028B7B8A2709C61D0028C1B7 /* AppDelegate.swift */; };
+		028B7B8D2709C61D0028C1B7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028B7B8C2709C61D0028C1B7 /* SceneDelegate.swift */; };
+		028B7B8F2709C61D0028C1B7 /* JournalTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028B7B8E2709C61D0028C1B7 /* JournalTableViewController.swift */; };
+		028B7B942709C61F0028C1B7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 028B7B932709C61F0028C1B7 /* Assets.xcassets */; };
+		028B7B972709C61F0028C1B7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 028B7B952709C61F0028C1B7 /* LaunchScreen.storyboard */; };
+		028B7BA22709C6200028C1B7 /* StudentsJournalAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028B7BA12709C6200028C1B7 /* StudentsJournalAppTests.swift */; };
+		028B7BAC2709C6200028C1B7 /* StudentsJournalAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028B7BAB2709C6200028C1B7 /* StudentsJournalAppUITests.swift */; };
+		028B7BAE2709C6200028C1B7 /* StudentsJournalAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028B7BAD2709C6200028C1B7 /* StudentsJournalAppUITestsLaunchTests.swift */; };
+		028B7BC7270CA34E0028C1B7 /* CreateJournalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028B7BC6270CA34E0028C1B7 /* CreateJournalViewController.swift */; };
+		028B7BCB270DB0F00028C1B7 /* StudentsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028B7BCA270DB0F00028C1B7 /* StudentsTableViewController.swift */; };
+		028B7BCD270DB3850028C1B7 /* Journal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028B7BCC270DB3850028C1B7 /* Journal.swift */; };
+		028B7BD1270E13BA0028C1B7 /* Student.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028B7BD0270E13BA0028C1B7 /* Student.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		0282896C271DC23900C91B40 /* PBXContainerItemProxy */ = {
+		028B7B9E2709C6200028C1B7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 0282894D271DC23500C91B40 /* Project object */;
+			containerPortal = 028B7B7F2709C61D0028C1B7 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 02828954271DC23500C91B40;
+			remoteGlobalIDString = 028B7B862709C61D0028C1B7;
 			remoteInfo = StudentsJournalApp;
 		};
-		02828976271DC23900C91B40 /* PBXContainerItemProxy */ = {
+		028B7BA82709C6200028C1B7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 0282894D271DC23500C91B40 /* Project object */;
+			containerPortal = 028B7B7F2709C61D0028C1B7 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 02828954271DC23500C91B40;
+			remoteGlobalIDString = 028B7B862709C61D0028C1B7;
 			remoteInfo = StudentsJournalApp;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		02828955271DC23500C91B40 /* StudentsJournalApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StudentsJournalApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		02828958271DC23500C91B40 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		0282895A271DC23500C91B40 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		0282895C271DC23500C91B40 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		0282895F271DC23500C91B40 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		02828961271DC23800C91B40 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		02828964271DC23800C91B40 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		02828966271DC23800C91B40 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0282896B271DC23900C91B40 /* StudentsJournalAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StudentsJournalAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		0282896F271DC23900C91B40 /* StudentsJournalAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentsJournalAppTests.swift; sourceTree = "<group>"; };
-		02828975271DC23900C91B40 /* StudentsJournalAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StudentsJournalAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		02828979271DC23900C91B40 /* StudentsJournalAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentsJournalAppUITests.swift; sourceTree = "<group>"; };
-		0282897B271DC23900C91B40 /* StudentsJournalAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentsJournalAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		02668A6E271077510023A331 /* SubjectsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectsTableViewController.swift; sourceTree = "<group>"; };
+		02828947271DB3AB00C91B40 /* JournalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalCell.swift; sourceTree = "<group>"; };
+		028B7B872709C61D0028C1B7 /* StudentsJournalApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StudentsJournalApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		028B7B8A2709C61D0028C1B7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		028B7B8C2709C61D0028C1B7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		028B7B8E2709C61D0028C1B7 /* JournalTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalTableViewController.swift; sourceTree = "<group>"; };
+		028B7B932709C61F0028C1B7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		028B7B962709C61F0028C1B7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		028B7B982709C61F0028C1B7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		028B7B9D2709C6200028C1B7 /* StudentsJournalAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StudentsJournalAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		028B7BA12709C6200028C1B7 /* StudentsJournalAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentsJournalAppTests.swift; sourceTree = "<group>"; };
+		028B7BA72709C6200028C1B7 /* StudentsJournalAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StudentsJournalAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		028B7BAB2709C6200028C1B7 /* StudentsJournalAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentsJournalAppUITests.swift; sourceTree = "<group>"; };
+		028B7BAD2709C6200028C1B7 /* StudentsJournalAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentsJournalAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		028B7BC6270CA34E0028C1B7 /* CreateJournalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateJournalViewController.swift; sourceTree = "<group>"; };
+		028B7BCA270DB0F00028C1B7 /* StudentsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentsTableViewController.swift; sourceTree = "<group>"; };
+		028B7BCC270DB3850028C1B7 /* Journal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Journal.swift; sourceTree = "<group>"; };
+		028B7BD0270E13BA0028C1B7 /* Student.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Student.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		02828952271DC23500C91B40 /* Frameworks */ = {
+		028B7B842709C61D0028C1B7 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		02828968271DC23900C91B40 /* Frameworks */ = {
+		028B7B9A2709C6200028C1B7 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		02828972271DC23900C91B40 /* Frameworks */ = {
+		028B7BA42709C6200028C1B7 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -76,53 +86,82 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0282894C271DC23500C91B40 = {
+		02828949271DB46C00C91B40 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				02828957271DC23500C91B40 /* StudentsJournalApp */,
-				0282896E271DC23900C91B40 /* StudentsJournalAppTests */,
-				02828978271DC23900C91B40 /* StudentsJournalAppUITests */,
-				02828956271DC23500C91B40 /* Products */,
+				028B7BCC270DB3850028C1B7 /* Journal.swift */,
+				028B7BD0270E13BA0028C1B7 /* Student.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		0282894A271DB48300C91B40 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				02828947271DB3AB00C91B40 /* JournalCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		0282894B271DB49600C91B40 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				028B7B8E2709C61D0028C1B7 /* JournalTableViewController.swift */,
+				028B7BC6270CA34E0028C1B7 /* CreateJournalViewController.swift */,
+				028B7BCA270DB0F00028C1B7 /* StudentsTableViewController.swift */,
+				02668A6E271077510023A331 /* SubjectsTableViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		028B7B7E2709C61D0028C1B7 = {
+			isa = PBXGroup;
+			children = (
+				028B7B892709C61D0028C1B7 /* StudentsJournalApp */,
+				028B7BA02709C6200028C1B7 /* StudentsJournalAppTests */,
+				028B7BAA2709C6200028C1B7 /* StudentsJournalAppUITests */,
+				028B7B882709C61D0028C1B7 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		02828956271DC23500C91B40 /* Products */ = {
+		028B7B882709C61D0028C1B7 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				02828955271DC23500C91B40 /* StudentsJournalApp.app */,
-				0282896B271DC23900C91B40 /* StudentsJournalAppTests.xctest */,
-				02828975271DC23900C91B40 /* StudentsJournalAppUITests.xctest */,
+				028B7B872709C61D0028C1B7 /* StudentsJournalApp.app */,
+				028B7B9D2709C6200028C1B7 /* StudentsJournalAppTests.xctest */,
+				028B7BA72709C6200028C1B7 /* StudentsJournalAppUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		02828957271DC23500C91B40 /* StudentsJournalApp */ = {
+		028B7B892709C61D0028C1B7 /* StudentsJournalApp */ = {
 			isa = PBXGroup;
 			children = (
-				02828958271DC23500C91B40 /* AppDelegate.swift */,
-				0282895A271DC23500C91B40 /* SceneDelegate.swift */,
-				0282895C271DC23500C91B40 /* ViewController.swift */,
-				0282895E271DC23500C91B40 /* Main.storyboard */,
-				02828961271DC23800C91B40 /* Assets.xcassets */,
-				02828963271DC23800C91B40 /* LaunchScreen.storyboard */,
-				02828966271DC23800C91B40 /* Info.plist */,
+				0282894B271DB49600C91B40 /* Controller */,
+				0282894A271DB48300C91B40 /* View */,
+				02828949271DB46C00C91B40 /* Model */,
+				028B7B8A2709C61D0028C1B7 /* AppDelegate.swift */,
+				028B7B8C2709C61D0028C1B7 /* SceneDelegate.swift */,
+				028B7B932709C61F0028C1B7 /* Assets.xcassets */,
+				028B7B952709C61F0028C1B7 /* LaunchScreen.storyboard */,
+				028B7B982709C61F0028C1B7 /* Info.plist */,
 			);
 			path = StudentsJournalApp;
 			sourceTree = "<group>";
 		};
-		0282896E271DC23900C91B40 /* StudentsJournalAppTests */ = {
+		028B7BA02709C6200028C1B7 /* StudentsJournalAppTests */ = {
 			isa = PBXGroup;
 			children = (
-				0282896F271DC23900C91B40 /* StudentsJournalAppTests.swift */,
+				028B7BA12709C6200028C1B7 /* StudentsJournalAppTests.swift */,
 			);
 			path = StudentsJournalAppTests;
 			sourceTree = "<group>";
 		};
-		02828978271DC23900C91B40 /* StudentsJournalAppUITests */ = {
+		028B7BAA2709C6200028C1B7 /* StudentsJournalAppUITests */ = {
 			isa = PBXGroup;
 			children = (
-				02828979271DC23900C91B40 /* StudentsJournalAppUITests.swift */,
-				0282897B271DC23900C91B40 /* StudentsJournalAppUITestsLaunchTests.swift */,
+				028B7BAB2709C6200028C1B7 /* StudentsJournalAppUITests.swift */,
+				028B7BAD2709C6200028C1B7 /* StudentsJournalAppUITestsLaunchTests.swift */,
 			);
 			path = StudentsJournalAppUITests;
 			sourceTree = "<group>";
@@ -130,13 +169,13 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		02828954271DC23500C91B40 /* StudentsJournalApp */ = {
+		028B7B862709C61D0028C1B7 /* StudentsJournalApp */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0282897F271DC23900C91B40 /* Build configuration list for PBXNativeTarget "StudentsJournalApp" */;
+			buildConfigurationList = 028B7BB12709C6200028C1B7 /* Build configuration list for PBXNativeTarget "StudentsJournalApp" */;
 			buildPhases = (
-				02828951271DC23500C91B40 /* Sources */,
-				02828952271DC23500C91B40 /* Frameworks */,
-				02828953271DC23500C91B40 /* Resources */,
+				028B7B832709C61D0028C1B7 /* Sources */,
+				028B7B842709C61D0028C1B7 /* Frameworks */,
+				028B7B852709C61D0028C1B7 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -144,69 +183,69 @@
 			);
 			name = StudentsJournalApp;
 			productName = StudentsJournalApp;
-			productReference = 02828955271DC23500C91B40 /* StudentsJournalApp.app */;
+			productReference = 028B7B872709C61D0028C1B7 /* StudentsJournalApp.app */;
 			productType = "com.apple.product-type.application";
 		};
-		0282896A271DC23900C91B40 /* StudentsJournalAppTests */ = {
+		028B7B9C2709C6200028C1B7 /* StudentsJournalAppTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 02828982271DC23900C91B40 /* Build configuration list for PBXNativeTarget "StudentsJournalAppTests" */;
+			buildConfigurationList = 028B7BB42709C6200028C1B7 /* Build configuration list for PBXNativeTarget "StudentsJournalAppTests" */;
 			buildPhases = (
-				02828967271DC23900C91B40 /* Sources */,
-				02828968271DC23900C91B40 /* Frameworks */,
-				02828969271DC23900C91B40 /* Resources */,
+				028B7B992709C6200028C1B7 /* Sources */,
+				028B7B9A2709C6200028C1B7 /* Frameworks */,
+				028B7B9B2709C6200028C1B7 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				0282896D271DC23900C91B40 /* PBXTargetDependency */,
+				028B7B9F2709C6200028C1B7 /* PBXTargetDependency */,
 			);
 			name = StudentsJournalAppTests;
 			productName = StudentsJournalAppTests;
-			productReference = 0282896B271DC23900C91B40 /* StudentsJournalAppTests.xctest */;
+			productReference = 028B7B9D2709C6200028C1B7 /* StudentsJournalAppTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		02828974271DC23900C91B40 /* StudentsJournalAppUITests */ = {
+		028B7BA62709C6200028C1B7 /* StudentsJournalAppUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 02828985271DC23900C91B40 /* Build configuration list for PBXNativeTarget "StudentsJournalAppUITests" */;
+			buildConfigurationList = 028B7BB72709C6200028C1B7 /* Build configuration list for PBXNativeTarget "StudentsJournalAppUITests" */;
 			buildPhases = (
-				02828971271DC23900C91B40 /* Sources */,
-				02828972271DC23900C91B40 /* Frameworks */,
-				02828973271DC23900C91B40 /* Resources */,
+				028B7BA32709C6200028C1B7 /* Sources */,
+				028B7BA42709C6200028C1B7 /* Frameworks */,
+				028B7BA52709C6200028C1B7 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				02828977271DC23900C91B40 /* PBXTargetDependency */,
+				028B7BA92709C6200028C1B7 /* PBXTargetDependency */,
 			);
 			name = StudentsJournalAppUITests;
 			productName = StudentsJournalAppUITests;
-			productReference = 02828975271DC23900C91B40 /* StudentsJournalAppUITests.xctest */;
+			productReference = 028B7BA72709C6200028C1B7 /* StudentsJournalAppUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		0282894D271DC23500C91B40 /* Project object */ = {
+		028B7B7F2709C61D0028C1B7 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1300;
 				LastUpgradeCheck = 1300;
 				TargetAttributes = {
-					02828954271DC23500C91B40 = {
+					028B7B862709C61D0028C1B7 = {
 						CreatedOnToolsVersion = 13.0;
 					};
-					0282896A271DC23900C91B40 = {
+					028B7B9C2709C6200028C1B7 = {
 						CreatedOnToolsVersion = 13.0;
-						TestTargetID = 02828954271DC23500C91B40;
+						TestTargetID = 028B7B862709C61D0028C1B7;
 					};
-					02828974271DC23900C91B40 = {
+					028B7BA62709C6200028C1B7 = {
 						CreatedOnToolsVersion = 13.0;
-						TestTargetID = 02828954271DC23500C91B40;
+						TestTargetID = 028B7B862709C61D0028C1B7;
 					};
 				};
 			};
-			buildConfigurationList = 02828950271DC23500C91B40 /* Build configuration list for PBXProject "StudentsJournalApp" */;
+			buildConfigurationList = 028B7B822709C61D0028C1B7 /* Build configuration list for PBXProject "StudentsJournalApp" */;
 			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -214,37 +253,36 @@
 				en,
 				Base,
 			);
-			mainGroup = 0282894C271DC23500C91B40;
-			productRefGroup = 02828956271DC23500C91B40 /* Products */;
+			mainGroup = 028B7B7E2709C61D0028C1B7;
+			productRefGroup = 028B7B882709C61D0028C1B7 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				02828954271DC23500C91B40 /* StudentsJournalApp */,
-				0282896A271DC23900C91B40 /* StudentsJournalAppTests */,
-				02828974271DC23900C91B40 /* StudentsJournalAppUITests */,
+				028B7B862709C61D0028C1B7 /* StudentsJournalApp */,
+				028B7B9C2709C6200028C1B7 /* StudentsJournalAppTests */,
+				028B7BA62709C6200028C1B7 /* StudentsJournalAppUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		02828953271DC23500C91B40 /* Resources */ = {
+		028B7B852709C61D0028C1B7 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				02828965271DC23800C91B40 /* LaunchScreen.storyboard in Resources */,
-				02828962271DC23800C91B40 /* Assets.xcassets in Resources */,
-				02828960271DC23500C91B40 /* Main.storyboard in Resources */,
+				028B7B972709C61F0028C1B7 /* LaunchScreen.storyboard in Resources */,
+				028B7B942709C61F0028C1B7 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		02828969271DC23900C91B40 /* Resources */ = {
+		028B7B9B2709C6200028C1B7 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		02828973271DC23900C91B40 /* Resources */ = {
+		028B7BA52709C6200028C1B7 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -254,61 +292,59 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		02828951271DC23500C91B40 /* Sources */ = {
+		028B7B832709C61D0028C1B7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0282895D271DC23500C91B40 /* ViewController.swift in Sources */,
-				02828959271DC23500C91B40 /* AppDelegate.swift in Sources */,
-				0282895B271DC23500C91B40 /* SceneDelegate.swift in Sources */,
+				028B7B8F2709C61D0028C1B7 /* JournalTableViewController.swift in Sources */,
+				028B7BC7270CA34E0028C1B7 /* CreateJournalViewController.swift in Sources */,
+				028B7B8B2709C61D0028C1B7 /* AppDelegate.swift in Sources */,
+				028B7BCD270DB3850028C1B7 /* Journal.swift in Sources */,
+				02828948271DB3AB00C91B40 /* JournalCell.swift in Sources */,
+				028B7BCB270DB0F00028C1B7 /* StudentsTableViewController.swift in Sources */,
+				028B7B8D2709C61D0028C1B7 /* SceneDelegate.swift in Sources */,
+				02668A6F271077510023A331 /* SubjectsTableViewController.swift in Sources */,
+				028B7BD1270E13BA0028C1B7 /* Student.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		02828967271DC23900C91B40 /* Sources */ = {
+		028B7B992709C6200028C1B7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				02828970271DC23900C91B40 /* StudentsJournalAppTests.swift in Sources */,
+				028B7BA22709C6200028C1B7 /* StudentsJournalAppTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		02828971271DC23900C91B40 /* Sources */ = {
+		028B7BA32709C6200028C1B7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0282897C271DC23900C91B40 /* StudentsJournalAppUITestsLaunchTests.swift in Sources */,
-				0282897A271DC23900C91B40 /* StudentsJournalAppUITests.swift in Sources */,
+				028B7BAE2709C6200028C1B7 /* StudentsJournalAppUITestsLaunchTests.swift in Sources */,
+				028B7BAC2709C6200028C1B7 /* StudentsJournalAppUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		0282896D271DC23900C91B40 /* PBXTargetDependency */ = {
+		028B7B9F2709C6200028C1B7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 02828954271DC23500C91B40 /* StudentsJournalApp */;
-			targetProxy = 0282896C271DC23900C91B40 /* PBXContainerItemProxy */;
+			target = 028B7B862709C61D0028C1B7 /* StudentsJournalApp */;
+			targetProxy = 028B7B9E2709C6200028C1B7 /* PBXContainerItemProxy */;
 		};
-		02828977271DC23900C91B40 /* PBXTargetDependency */ = {
+		028B7BA92709C6200028C1B7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 02828954271DC23500C91B40 /* StudentsJournalApp */;
-			targetProxy = 02828976271DC23900C91B40 /* PBXContainerItemProxy */;
+			target = 028B7B862709C61D0028C1B7 /* StudentsJournalApp */;
+			targetProxy = 028B7BA82709C6200028C1B7 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		0282895E271DC23500C91B40 /* Main.storyboard */ = {
+		028B7B952709C61F0028C1B7 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				0282895F271DC23500C91B40 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		02828963271DC23800C91B40 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				02828964271DC23800C91B40 /* Base */,
+				028B7B962709C61F0028C1B7 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -316,7 +352,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		0282897D271DC23900C91B40 /* Debug */ = {
+		028B7BAF2709C6200028C1B7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -367,7 +403,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -377,7 +413,7 @@
 			};
 			name = Debug;
 		};
-		0282897E271DC23900C91B40 /* Release */ = {
+		028B7BB02709C6200028C1B7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -422,7 +458,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -432,7 +468,7 @@
 			};
 			name = Release;
 		};
-		02828980271DC23900C91B40 /* Debug */ = {
+		028B7BB22709C6200028C1B7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -443,9 +479,10 @@
 				INFOPLIST_FILE = StudentsJournalApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -459,7 +496,7 @@
 			};
 			name = Debug;
 		};
-		02828981271DC23900C91B40 /* Release */ = {
+		028B7BB32709C6200028C1B7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -470,9 +507,10 @@
 				INFOPLIST_FILE = StudentsJournalApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -486,7 +524,7 @@
 			};
 			name = Release;
 		};
-		02828983271DC23900C91B40 /* Debug */ = {
+		028B7BB52709C6200028C1B7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
@@ -510,7 +548,7 @@
 			};
 			name = Debug;
 		};
-		02828984271DC23900C91B40 /* Release */ = {
+		028B7BB62709C6200028C1B7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
@@ -534,7 +572,7 @@
 			};
 			name = Release;
 		};
-		02828986271DC23900C91B40 /* Debug */ = {
+		028B7BB82709C6200028C1B7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
@@ -556,7 +594,7 @@
 			};
 			name = Debug;
 		};
-		02828987271DC23900C91B40 /* Release */ = {
+		028B7BB92709C6200028C1B7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
@@ -581,43 +619,43 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		02828950271DC23500C91B40 /* Build configuration list for PBXProject "StudentsJournalApp" */ = {
+		028B7B822709C61D0028C1B7 /* Build configuration list for PBXProject "StudentsJournalApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				0282897D271DC23900C91B40 /* Debug */,
-				0282897E271DC23900C91B40 /* Release */,
+				028B7BAF2709C6200028C1B7 /* Debug */,
+				028B7BB02709C6200028C1B7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0282897F271DC23900C91B40 /* Build configuration list for PBXNativeTarget "StudentsJournalApp" */ = {
+		028B7BB12709C6200028C1B7 /* Build configuration list for PBXNativeTarget "StudentsJournalApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				02828980271DC23900C91B40 /* Debug */,
-				02828981271DC23900C91B40 /* Release */,
+				028B7BB22709C6200028C1B7 /* Debug */,
+				028B7BB32709C6200028C1B7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		02828982271DC23900C91B40 /* Build configuration list for PBXNativeTarget "StudentsJournalAppTests" */ = {
+		028B7BB42709C6200028C1B7 /* Build configuration list for PBXNativeTarget "StudentsJournalAppTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				02828983271DC23900C91B40 /* Debug */,
-				02828984271DC23900C91B40 /* Release */,
+				028B7BB52709C6200028C1B7 /* Debug */,
+				028B7BB62709C6200028C1B7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		02828985271DC23900C91B40 /* Build configuration list for PBXNativeTarget "StudentsJournalAppUITests" */ = {
+		028B7BB72709C6200028C1B7 /* Build configuration list for PBXNativeTarget "StudentsJournalAppUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				02828986271DC23900C91B40 /* Debug */,
-				02828987271DC23900C91B40 /* Release */,
+				028B7BB82709C6200028C1B7 /* Debug */,
+				028B7BB92709C6200028C1B7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 0282894D271DC23500C91B40 /* Project object */;
+	rootObject = 028B7B7F2709C61D0028C1B7 /* Project object */;
 }
