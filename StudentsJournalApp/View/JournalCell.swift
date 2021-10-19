@@ -1,7 +1,5 @@
 import UIKit
 
-// MARK: JournalCell
-
 final class JournalCell: UITableViewCell {
 
     var journalTableViewController: JournalTableViewController?
@@ -11,6 +9,10 @@ final class JournalCell: UITableViewCell {
         setupViews()
     }
 
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     let label: UILabel = {
         let label = UILabel()
 
@@ -18,7 +20,6 @@ final class JournalCell: UITableViewCell {
         label.numberOfLines = 0
         label.textColor = .black
         label.font = UIFont.systemFont(ofSize: 15)
-        label.translatesAutoresizingMaskIntoConstraints = false
 
         return label
     }()
@@ -30,7 +31,6 @@ final class JournalCell: UITableViewCell {
         button.setTitle("Remove", for: .normal)
         button.setTitleColor(.systemBlue, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 15)
-        button.translatesAutoresizingMaskIntoConstraints = false
 
         return button
     }()
@@ -42,7 +42,6 @@ final class JournalCell: UITableViewCell {
         button.setTitle("Edit", for: .normal)
         button.setTitleColor(.systemBlue, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 15)
-        button.translatesAutoresizingMaskIntoConstraints = false
 
         return button
     }()
@@ -52,6 +51,7 @@ final class JournalCell: UITableViewCell {
 
         self.contentView.addSubview(removeButton)
         removeButton.addTarget(self, action: #selector(handleRemoveAction), for: .touchUpInside)
+        removeButton.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
             removeButton.rightAnchor.constraint(equalTo: self.contentView.safeAreaLayoutGuide.rightAnchor, constant: -10),
@@ -60,6 +60,7 @@ final class JournalCell: UITableViewCell {
 
         self.contentView.addSubview(editButton)
         editButton.addTarget(self, action: #selector(handleEditAction), for: .touchUpInside)
+        editButton.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
             editButton.rightAnchor.constraint(equalTo: removeButton.leftAnchor, constant: -10),
@@ -67,6 +68,8 @@ final class JournalCell: UITableViewCell {
         ])
 
         self.contentView.addSubview(label)
+        label.translatesAutoresizingMaskIntoConstraints = false
+
         NSLayoutConstraint.activate([
             label.leftAnchor.constraint(equalTo: self.contentView.safeAreaLayoutGuide.leftAnchor, constant: 20),
             label.rightAnchor.constraint(equalTo: editButton.leftAnchor, constant: -10),
@@ -75,17 +78,11 @@ final class JournalCell: UITableViewCell {
         ])
     }
 
-    @objc
-    func handleRemoveAction() {
+    @objc func handleRemoveAction() {
         journalTableViewController?.deleteCell(cell: self)
     }
 
-    @objc
-    func handleEditAction() {
+    @objc func handleEditAction() {
         // TODO: edit group name
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }

@@ -1,12 +1,12 @@
 import UIKit
 
 final class StudentsTableViewController: UITableViewController {
-    let isPresented: Bool
+    let shouldShowCloseButton: Bool
     let cellId = "cellId"
-    var items = [Student]()
+    var items: [Student] = []
 
-    init(isPresented: Bool) {
-        self.isPresented = isPresented
+    init(shouldShowCloseButton: Bool) {
+        self.shouldShowCloseButton = shouldShowCloseButton
 
         super.init(style: .plain)
     }
@@ -26,9 +26,7 @@ final class StudentsTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as? StudentCell else {
-            return UITableViewCell()
-        }
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! StudentCell
 
         cell.studentName.text = "\(items[indexPath.row].firstName) \(items[indexPath.row].secondName)"
         cell.studentsTableViewController = self
@@ -37,23 +35,24 @@ final class StudentsTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return items.count
+        items.count
     }
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 40
+        40
     }
 
     private func setupNavigationBar() {
         navigationItem.title = "Students"
 
-        if isPresented {
+        if shouldShowCloseButton {
             navigationItem.leftBarButtonItem = UIBarButtonItem(
                 title: "close",
                 image: nil,
                 primaryAction: UIAction(handler: { [weak self] _ in
                     self?.dismiss(animated: true, completion: nil)
-                }), menu: nil)
+                }), menu: nil
+            )
         } else {
             navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add,
                                                                 target: self,
@@ -72,8 +71,7 @@ final class StudentsTableViewController: UITableViewController {
         }
     }
 
-    @objc
-    func addNewStudent() {
+    @objc func addNewStudent() {
         let viewController = CreateStudentViewController()
         let navigationController = UINavigationController(rootViewController: viewController)
         viewController.delegate = self

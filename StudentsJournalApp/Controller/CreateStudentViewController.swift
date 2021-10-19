@@ -11,6 +11,10 @@ final class CreateStudentViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
     }
 
+    required init(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -18,25 +22,22 @@ final class CreateStudentViewController: UIViewController {
     }
 
     var firstNameTextField: UITextField = {
-        let textField: UITextField = .init()
+        let textField = UITextField()
 
         textField.backgroundColor = .white
-        textField.translatesAutoresizingMaskIntoConstraints = false
 
         return textField
     }()
 
     var secondNameTextField: UITextField = {
-        let textField: UITextField = .init()
+        let textField = UITextField()
 
         textField.backgroundColor = .white
-        textField.translatesAutoresizingMaskIntoConstraints = false
 
         return textField
     }()
 
-    @objc
-    func closeView() {
+    @objc func closeView() {
         navigationController?.popViewController(animated: true)
 
         dismiss(animated: true, completion: nil) // TODO: закрывать в StudentsTableViewController
@@ -48,14 +49,16 @@ final class CreateStudentViewController: UIViewController {
             return
         }
 
-        delegate?.createStudent(vc: self, didCreate: .init(firstName: firstName, secondName: secondName, subjects: nil))
+        delegate?.createStudent(vc: self, didCreate: Student(firstName: firstName, secondName: secondName, subjects: nil))
         closeView()
     }
 
     func setupViews() {
         view.backgroundColor = .white
 
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(createStudent))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done,
+                                                            target: self,
+                                                            action: #selector(createStudent))
         navigationItem.title = "Create Journal"
 
 
@@ -64,6 +67,7 @@ final class CreateStudentViewController: UIViewController {
 //        TODO: firstField.addTarget(self, action: <#T##Selector#>, for: .valueChanged) - в селектор будут отправляться изменения
         firstNameTextField.placeholder = "Write the first name"
         firstNameTextField.backgroundColor = .secondarySystemFill
+        firstNameTextField.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
             firstNameTextField.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -10),
@@ -75,6 +79,7 @@ final class CreateStudentViewController: UIViewController {
         view.addSubview(secondNameTextField)
         secondNameTextField.placeholder = "Write the second name"
         secondNameTextField.backgroundColor = .secondarySystemFill
+        secondNameTextField.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
             secondNameTextField.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -10),
@@ -82,9 +87,5 @@ final class CreateStudentViewController: UIViewController {
             secondNameTextField.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 10),
             secondNameTextField.heightAnchor.constraint(equalToConstant: 40)
         ])
-    }
-
-    required init(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }

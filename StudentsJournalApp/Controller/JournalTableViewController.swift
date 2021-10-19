@@ -1,14 +1,12 @@
 import UIKit
 
-// MARK: JournalTableViewController
-
 final class JournalTableViewController: UITableViewController {
-    let isPresented: Bool
+    let shouldShowCloseButton: Bool
     let cellId = "cellId"
-    var items = [Journal]()
+    var items: [Journal] = []
 
-    init(isPresented: Bool) {
-        self.isPresented = isPresented
+    init(shouldShowCloseButton: Bool) {
+        self.shouldShowCloseButton = shouldShowCloseButton
 
         super.init(style: .plain)
     }
@@ -28,9 +26,7 @@ final class JournalTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as? JournalCell else {
-            return UITableViewCell()
-        }
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! JournalCell
 
         cell.label.text = items[indexPath.row].group.groupName
         cell.journalTableViewController = self
@@ -39,30 +35,33 @@ final class JournalTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return items.count
+        items.count
     }
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 40
+        40
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let destination = StudentsTableViewController(isPresented: false)
+        let destination = StudentsTableViewController(shouldShowCloseButton: false)
         navigationController?.pushViewController(destination, animated: true)
     }
 
     private func setupNavigationBar() {
         navigationItem.title = "Journal"
 
-        if isPresented {
+        if shouldShowCloseButton {
             navigationItem.leftBarButtonItem = UIBarButtonItem(
                 title: "close",
                 image: nil,
                 primaryAction: UIAction(handler: { [weak self] _ in
                     self?.dismiss(animated: true, completion: nil)
-                }), menu: nil)
+                }), menu: nil
+            )
         } else {
-            navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNewJournal))
+            navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add,
+                                                                target: self,
+                                                                action: #selector(addNewJournal))
         }
     }
 
@@ -77,8 +76,7 @@ final class JournalTableViewController: UITableViewController {
         }
     }
 
-    @objc
-    func addNewJournal() {
+    @objc func addNewJournal() {
         let viewController = CreateJournalViewController()
         let navigationController = UINavigationController(rootViewController: viewController)
         viewController.delegate = self

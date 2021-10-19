@@ -12,6 +12,10 @@ final class CreateJournalViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
     }
 
+    required init(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -19,16 +23,14 @@ final class CreateJournalViewController: UIViewController {
     }
 
     var textField: UITextField = {
-        let textField: UITextField = .init()
+        let textField = UITextField()
 
         textField.backgroundColor = .white
-        textField.translatesAutoresizingMaskIntoConstraints = false
 
         return textField
     }()
 
-    @objc
-    func closeView() {
+    @objc func closeView() {
         navigationController?.popViewController(animated: true)
 
         dismiss(animated: true, completion: nil) // TODO: закрывать в JournalTableViewController
@@ -40,14 +42,16 @@ final class CreateJournalViewController: UIViewController {
             return
         }
 
-        delegate?.createJournal(vc: self, didCreate: .init(group: .init(groupName: text, students: nil)))
+        delegate?.createJournal(vc: self, didCreate: Journal(group: Group(groupName: text, students: nil)))
         closeView()
     }
 
     func setupViews() {
         view.backgroundColor = .white
 
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(createJournal))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done,
+                                                            target: self,
+                                                            action: #selector(createJournal))
         navigationItem.title = "Create Journal"
 
 
@@ -56,15 +60,12 @@ final class CreateJournalViewController: UIViewController {
 //        TODO: firstField.addTarget(self, action: <#T##Selector#>, for: .valueChanged) - в селектор будут отправляться изменения
         textField.placeholder = "Write the group number"
         textField.backgroundColor = .secondarySystemFill
+        textField.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
             textField.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -10),
             textField.topAnchor.constraint(equalTo: view.topAnchor, constant: 75),
             textField.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 10),
             textField.heightAnchor.constraint(equalToConstant: 40)])
-    }
-
-    required init(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }

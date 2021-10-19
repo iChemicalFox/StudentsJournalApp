@@ -9,6 +9,10 @@ final class StudentCell: UITableViewCell {
         setupViews()
     }
 
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     let studentName: UILabel = {
         let label = UILabel()
 
@@ -16,7 +20,6 @@ final class StudentCell: UITableViewCell {
         label.numberOfLines = 0
         label.textColor = .black
         label.font = UIFont.systemFont(ofSize: 15)
-        label.translatesAutoresizingMaskIntoConstraints = false
 
         return label
     }()
@@ -28,7 +31,6 @@ final class StudentCell: UITableViewCell {
         label.numberOfLines = 0
         label.textColor = .purple
         label.font = UIFont.systemFont(ofSize: 15)
-        label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "0,00" // временно
 
         return label
@@ -41,7 +43,6 @@ final class StudentCell: UITableViewCell {
         button.setTitle("Remove", for: .normal)
         button.setTitleColor(.systemBlue, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 15)
-        button.translatesAutoresizingMaskIntoConstraints = false
 
         return button
     }()
@@ -63,6 +64,7 @@ final class StudentCell: UITableViewCell {
 
         self.contentView.addSubview(removeButton)
         removeButton.addTarget(self, action: #selector(handleRemoveAction), for: .touchUpInside)
+        removeButton.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
             removeButton.rightAnchor.constraint(equalTo: self.contentView.safeAreaLayoutGuide.rightAnchor, constant: -10),
@@ -71,6 +73,7 @@ final class StudentCell: UITableViewCell {
 
         self.contentView.addSubview(editButton)
         editButton.addTarget(self, action: #selector(handleEditAction), for: .touchUpInside)
+        editButton.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
             editButton.rightAnchor.constraint(equalTo: removeButton.leftAnchor, constant: -10),
@@ -78,6 +81,8 @@ final class StudentCell: UITableViewCell {
         ])
 
         self.contentView.addSubview(averageRate)
+        averageRate.translatesAutoresizingMaskIntoConstraints = false
+
         NSLayoutConstraint.activate([
             averageRate.rightAnchor.constraint(equalTo: editButton.leftAnchor, constant: -10),
             averageRate.topAnchor.constraint(equalTo: self.contentView.safeAreaLayoutGuide.topAnchor, constant: 5),
@@ -86,6 +91,8 @@ final class StudentCell: UITableViewCell {
         ])
 
         self.contentView.addSubview(studentName)
+        studentName.translatesAutoresizingMaskIntoConstraints = false
+
         NSLayoutConstraint.activate([
             studentName.leftAnchor.constraint(equalTo: self.contentView.safeAreaLayoutGuide.leftAnchor, constant: 20),
             studentName.rightAnchor.constraint(equalTo: averageRate.leftAnchor, constant: -10),
@@ -94,17 +101,11 @@ final class StudentCell: UITableViewCell {
         ])
     }
 
-    @objc
-    func handleRemoveAction() {
+    @objc func handleRemoveAction() {
         studentsTableViewController?.deleteCell(cell: self)
     }
 
-    @objc
-    func handleEditAction() {
+    @objc func handleEditAction() {
         // TODO: edit student name
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }
