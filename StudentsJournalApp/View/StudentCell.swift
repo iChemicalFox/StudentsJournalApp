@@ -9,7 +9,7 @@ final class StudentCell: UITableViewCell {
         setupViews()
     }
 
-    let label: UILabel = {
+    let studentName: UILabel = {
         let label = UILabel()
 
         label.backgroundColor = .clear
@@ -17,6 +17,19 @@ final class StudentCell: UITableViewCell {
         label.textColor = .black
         label.font = UIFont.systemFont(ofSize: 15)
         label.translatesAutoresizingMaskIntoConstraints = false
+
+        return label
+    }()
+
+    let averageRate: UILabel = {
+        let label = UILabel()
+
+        label.backgroundColor = .clear
+        label.numberOfLines = 0
+        label.textColor = .purple
+        label.font = UIFont.systemFont(ofSize: 15)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "0,00" // временно
 
         return label
     }()
@@ -64,12 +77,20 @@ final class StudentCell: UITableViewCell {
             editButton.widthAnchor.constraint(equalToConstant: 60)
         ])
 
-        self.contentView.addSubview(label)
+        self.contentView.addSubview(averageRate)
         NSLayoutConstraint.activate([
-            label.leftAnchor.constraint(equalTo: self.contentView.safeAreaLayoutGuide.leftAnchor, constant: 20),
-            label.rightAnchor.constraint(equalTo: editButton.leftAnchor, constant: -10),
-            label.topAnchor.constraint(equalTo: self.contentView.safeAreaLayoutGuide.topAnchor, constant: 5),
-            label.bottomAnchor.constraint(equalTo: self.contentView.safeAreaLayoutGuide.bottomAnchor, constant: -5)
+            averageRate.rightAnchor.constraint(equalTo: editButton.leftAnchor, constant: -10),
+            averageRate.topAnchor.constraint(equalTo: self.contentView.safeAreaLayoutGuide.topAnchor, constant: 5),
+            averageRate.bottomAnchor.constraint(equalTo: self.contentView.safeAreaLayoutGuide.bottomAnchor, constant: -5),
+            editButton.widthAnchor.constraint(equalToConstant: 30)
+        ])
+
+        self.contentView.addSubview(studentName)
+        NSLayoutConstraint.activate([
+            studentName.leftAnchor.constraint(equalTo: self.contentView.safeAreaLayoutGuide.leftAnchor, constant: 20),
+            studentName.rightAnchor.constraint(equalTo: averageRate.leftAnchor, constant: -10),
+            studentName.topAnchor.constraint(equalTo: self.contentView.safeAreaLayoutGuide.topAnchor, constant: 5),
+            studentName.bottomAnchor.constraint(equalTo: self.contentView.safeAreaLayoutGuide.bottomAnchor, constant: -5)
         ])
     }
 
@@ -80,7 +101,7 @@ final class StudentCell: UITableViewCell {
 
     @objc
     func handleEditAction() {
-        // TODO: edit group name
+        // TODO: edit student name
     }
 
     required init?(coder: NSCoder) {

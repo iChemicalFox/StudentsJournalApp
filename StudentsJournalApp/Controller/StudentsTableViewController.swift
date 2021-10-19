@@ -30,7 +30,7 @@ final class StudentsTableViewController: UITableViewController {
             return UITableViewCell()
         }
 
-        cell.label.text = "\(items[indexPath.row].firstName) \(items[indexPath.row].secondName)"
+        cell.studentName.text = "\(items[indexPath.row].firstName) \(items[indexPath.row].secondName)"
         cell.studentsTableViewController = self
 
         return cell
