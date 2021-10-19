@@ -1,9 +1,9 @@
 import UIKit
 
 final class JournalTableViewController: UITableViewController {
-    let shouldShowCloseButton: Bool
-    let cellId = "cellId"
-    var items: [Journal] = []
+    private let shouldShowCloseButton: Bool
+    private var items: [Journal] = []
+    private let cellId = "cellId"
 
     init(shouldShowCloseButton: Bool) {
         self.shouldShowCloseButton = shouldShowCloseButton
@@ -65,7 +65,7 @@ final class JournalTableViewController: UITableViewController {
         }
     }
 
-    func insertCell(with model: Journal) {
+    private func insertCell(with model: Journal) {
         items.append(model)
     }
 
@@ -76,7 +76,7 @@ final class JournalTableViewController: UITableViewController {
         }
     }
 
-    @objc func addNewJournal() {
+    @objc private func addNewJournal() {
         let viewController = CreateJournalViewController()
         let navigationController = UINavigationController(rootViewController: viewController)
         viewController.delegate = self

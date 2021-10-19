@@ -1,9 +1,9 @@
 import UIKit
 
 final class StudentsTableViewController: UITableViewController {
-    let shouldShowCloseButton: Bool
-    let cellId = "cellId"
-    var items: [Student] = []
+    private let shouldShowCloseButton: Bool
+    private let cellId = "cellId"
+    private var items: [Student] = []
 
     init(shouldShowCloseButton: Bool) {
         self.shouldShowCloseButton = shouldShowCloseButton
@@ -60,7 +60,7 @@ final class StudentsTableViewController: UITableViewController {
         }
     }
 
-    func insertCell(with model: Student) {
+    private func insertCell(with model: Student) {
         items.append(model)
     }
 
@@ -71,7 +71,7 @@ final class StudentsTableViewController: UITableViewController {
         }
     }
 
-    @objc func addNewStudent() {
+    @objc private func addNewStudent() {
         let viewController = CreateStudentViewController()
         let navigationController = UINavigationController(rootViewController: viewController)
         viewController.delegate = self

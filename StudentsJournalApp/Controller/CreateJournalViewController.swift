@@ -30,13 +30,13 @@ final class CreateJournalViewController: UIViewController {
         return textField
     }()
 
-    @objc func closeView() {
+    @objc private func closeView() {
         navigationController?.popViewController(animated: true)
 
         dismiss(animated: true, completion: nil) // TODO: закрывать в JournalTableViewController
     }
 
-    @objc func createJournal() {
+    @objc private func createJournal() {
         guard let text = textField.text else {
             closeView()
             return
@@ -46,7 +46,7 @@ final class CreateJournalViewController: UIViewController {
         closeView()
     }
 
-    func setupViews() {
+    private func setupViews() {
         view.backgroundColor = .white
 
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done,

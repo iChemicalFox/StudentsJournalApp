@@ -59,7 +59,7 @@ final class StudentCell: UITableViewCell {
         return button
     }()
 
-    func setupViews() {
+    private func setupViews() {
         backgroundColor = .clear
 
         self.contentView.addSubview(removeButton)
@@ -101,11 +101,11 @@ final class StudentCell: UITableViewCell {
         ])
     }
 
-    @objc func handleRemoveAction() {
+    @objc private func handleRemoveAction() {
         studentsTableViewController?.deleteCell(cell: self)
     }
 
-    @objc func handleEditAction() {
+    @objc private func handleEditAction() {
         // TODO: edit student name
     }
 }

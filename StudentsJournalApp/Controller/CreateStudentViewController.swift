@@ -37,13 +37,13 @@ final class CreateStudentViewController: UIViewController {
         return textField
     }()
 
-    @objc func closeView() {
+    @objc private func closeView() {
         navigationController?.popViewController(animated: true)
 
         dismiss(animated: true, completion: nil) // TODO: закрывать в StudentsTableViewController
     }
 
-    @objc func createStudent() {
+    @objc private func createStudent() {
         guard let firstName = firstNameTextField.text, let secondName = secondNameTextField.text else {
             closeView()
             return
@@ -53,7 +53,7 @@ final class CreateStudentViewController: UIViewController {
         closeView()
     }
 
-    func setupViews() {
+    private func setupViews() {
         view.backgroundColor = .white
 
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done,

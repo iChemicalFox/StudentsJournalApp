@@ -46,7 +46,7 @@ final class JournalCell: UITableViewCell {
         return button
     }()
 
-    func setupViews() {
+    private func setupViews() {
         backgroundColor = .clear
 
         self.contentView.addSubview(removeButton)
@@ -78,11 +78,11 @@ final class JournalCell: UITableViewCell {
         ])
     }
 
-    @objc func handleRemoveAction() {
+    @objc private func handleRemoveAction() {
         journalTableViewController?.deleteCell(cell: self)
     }
 
-    @objc func handleEditAction() {
+    @objc private func handleEditAction() {
         // TODO: edit group name
     }
 }
