@@ -32,7 +32,7 @@ final class JournalTableViewController: UITableViewController {
             return UITableViewCell()
         }
 
-        cell.label.text = items[indexPath.row].group
+        cell.label.text = items[indexPath.row].group.groupName
         cell.journalTableViewController = self
 
         return cell
@@ -44,6 +44,11 @@ final class JournalTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 40
+    }
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let destination = StudentsTableViewController(isPresented: false)
+        navigationController?.pushViewController(destination, animated: true)
     }
 
     private func setupNavigationBar() {
