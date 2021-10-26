@@ -1,8 +1,7 @@
 import UIKit
 
-final class JournalCell: UITableViewCell {
-
-    weak var journalTableViewController: JournalTableViewController?
+final class SubjectCell: UITableViewCell {
+    var subjectsTableViewController: SubjectsTableViewController?
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -13,18 +12,23 @@ final class JournalCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    override func prepareForReuse() {
-        super.prepareForReuse()
-
-        label.text = nil // очистка тут и в других ячейках
-    }
-
-    let label: UILabel = {
+    let subjectName: UILabel = {
         let label = UILabel()
 
         label.backgroundColor = .clear
         label.numberOfLines = 0
         label.textColor = .black
+        label.font = UIFont.systemFont(ofSize: 15)
+
+        return label
+    }()
+
+    let subjectRating: UILabel = {
+        let label = UILabel()
+
+        label.backgroundColor = .clear
+        label.numberOfLines = 0
+        label.textColor = .purple
         label.font = UIFont.systemFont(ofSize: 15)
 
         return label
@@ -48,6 +52,7 @@ final class JournalCell: UITableViewCell {
         button.setTitle("Edit", for: .normal)
         button.setTitleColor(.systemBlue, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 15)
+        button.translatesAutoresizingMaskIntoConstraints = false
 
         return button
     }()
@@ -73,22 +78,32 @@ final class JournalCell: UITableViewCell {
             editButton.widthAnchor.constraint(equalToConstant: 60)
         ])
 
-        self.contentView.addSubview(label)
-        label.translatesAutoresizingMaskIntoConstraints = false
+        self.contentView.addSubview(subjectRating)
+        subjectRating.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
-            label.leftAnchor.constraint(equalTo: self.contentView.safeAreaLayoutGuide.leftAnchor, constant: 20),
-            label.rightAnchor.constraint(equalTo: editButton.leftAnchor, constant: -10),
-            label.topAnchor.constraint(equalTo: self.contentView.safeAreaLayoutGuide.topAnchor, constant: 5),
-            label.bottomAnchor.constraint(equalTo: self.contentView.safeAreaLayoutGuide.bottomAnchor, constant: -5)
+            subjectRating.rightAnchor.constraint(equalTo: editButton.leftAnchor, constant: -10),
+            subjectRating.topAnchor.constraint(equalTo: self.contentView.safeAreaLayoutGuide.topAnchor, constant: 5),
+            subjectRating.bottomAnchor.constraint(equalTo: self.contentView.safeAreaLayoutGuide.bottomAnchor, constant: -5),
+            editButton.widthAnchor.constraint(equalToConstant: 30)
+        ])
+
+        self.contentView.addSubview(subjectName)
+        subjectName.translatesAutoresizingMaskIntoConstraints = false
+
+        NSLayoutConstraint.activate([
+            subjectName.leftAnchor.constraint(equalTo: self.contentView.safeAreaLayoutGuide.leftAnchor, constant: 20),
+            subjectName.rightAnchor.constraint(equalTo: subjectRating.leftAnchor, constant: -10),
+            subjectName.topAnchor.constraint(equalTo: self.contentView.safeAreaLayoutGuide.topAnchor, constant: 5),
+            subjectName.bottomAnchor.constraint(equalTo: self.contentView.safeAreaLayoutGuide.bottomAnchor, constant: -5)
         ])
     }
 
     @objc private func handleRemoveAction() {
-        journalTableViewController?.deleteCell(cell: self)
+        subjectsTableViewController?.deleteCell(cell: self)
     }
 
     @objc private func handleEditAction() {
-        // TODO: edit group name
+        // TODO: edit rating
     }
 }

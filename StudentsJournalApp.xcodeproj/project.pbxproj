@@ -12,6 +12,8 @@
 		02828989271DCDFF00C91B40 /* StudentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02828988271DCDFF00C91B40 /* StudentCell.swift */; };
 		0282898B271DD2A900C91B40 /* CreateStudentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0282898A271DD2A900C91B40 /* CreateStudentViewController.swift */; };
 		0282898D271EAE1A00C91B40 /* Journal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0282898C271EAE1A00C91B40 /* Journal.swift */; };
+		028289932721A28200C91B40 /* SubjectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028289922721A28200C91B40 /* SubjectCell.swift */; };
+		028289952721A37900C91B40 /* CreateSubjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028289942721A37900C91B40 /* CreateSubjectViewController.swift */; };
 		028B7B8B2709C61D0028C1B7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028B7B8A2709C61D0028C1B7 /* AppDelegate.swift */; };
 		028B7B8D2709C61D0028C1B7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028B7B8C2709C61D0028C1B7 /* SceneDelegate.swift */; };
 		028B7B8F2709C61D0028C1B7 /* JournalTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028B7B8E2709C61D0028C1B7 /* JournalTableViewController.swift */; };
@@ -22,6 +24,7 @@
 		028B7BAE2709C6200028C1B7 /* StudentsJournalAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028B7BAD2709C6200028C1B7 /* StudentsJournalAppUITestsLaunchTests.swift */; };
 		028B7BC7270CA34E0028C1B7 /* CreateJournalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028B7BC6270CA34E0028C1B7 /* CreateJournalViewController.swift */; };
 		028B7BCB270DB0F00028C1B7 /* StudentsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028B7BCA270DB0F00028C1B7 /* StudentsTableViewController.swift */; };
+		02C45DC22726FDF600ACE6D3 /* JournalModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C45DC12726FDF600ACE6D3 /* JournalModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +50,8 @@
 		02828988271DCDFF00C91B40 /* StudentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentCell.swift; sourceTree = "<group>"; };
 		0282898A271DD2A900C91B40 /* CreateStudentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateStudentViewController.swift; sourceTree = "<group>"; };
 		0282898C271EAE1A00C91B40 /* Journal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Journal.swift; sourceTree = "<group>"; };
+		028289922721A28200C91B40 /* SubjectCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectCell.swift; sourceTree = "<group>"; };
+		028289942721A37900C91B40 /* CreateSubjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSubjectViewController.swift; sourceTree = "<group>"; };
 		028B7B872709C61D0028C1B7 /* StudentsJournalApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StudentsJournalApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		028B7B8A2709C61D0028C1B7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		028B7B8C2709C61D0028C1B7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -61,6 +66,7 @@
 		028B7BAD2709C6200028C1B7 /* StudentsJournalAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentsJournalAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		028B7BC6270CA34E0028C1B7 /* CreateJournalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateJournalViewController.swift; sourceTree = "<group>"; };
 		028B7BCA270DB0F00028C1B7 /* StudentsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentsTableViewController.swift; sourceTree = "<group>"; };
+		02C45DC12726FDF600ACE6D3 /* JournalModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +98,7 @@
 			isa = PBXGroup;
 			children = (
 				0282898C271EAE1A00C91B40 /* Journal.swift */,
+				02C45DC12726FDF600ACE6D3 /* JournalModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -101,6 +108,7 @@
 			children = (
 				02828947271DB3AB00C91B40 /* JournalCell.swift */,
 				02828988271DCDFF00C91B40 /* StudentCell.swift */,
+				028289922721A28200C91B40 /* SubjectCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -111,8 +119,9 @@
 				028B7B8E2709C61D0028C1B7 /* JournalTableViewController.swift */,
 				028B7BC6270CA34E0028C1B7 /* CreateJournalViewController.swift */,
 				028B7BCA270DB0F00028C1B7 /* StudentsTableViewController.swift */,
-				02668A6E271077510023A331 /* SubjectsTableViewController.swift */,
 				0282898A271DD2A900C91B40 /* CreateStudentViewController.swift */,
+				02668A6E271077510023A331 /* SubjectsTableViewController.swift */,
+				028289942721A37900C91B40 /* CreateSubjectViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -300,7 +309,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				028B7B8F2709C61D0028C1B7 /* JournalTableViewController.swift in Sources */,
+				028289952721A37900C91B40 /* CreateSubjectViewController.swift in Sources */,
+				028289932721A28200C91B40 /* SubjectCell.swift in Sources */,
 				028B7BC7270CA34E0028C1B7 /* CreateJournalViewController.swift in Sources */,
+				02C45DC22726FDF600ACE6D3 /* JournalModel.swift in Sources */,
 				028B7B8B2709C61D0028C1B7 /* AppDelegate.swift in Sources */,
 				02828948271DB3AB00C91B40 /* JournalCell.swift in Sources */,
 				02828989271DCDFF00C91B40 /* StudentCell.swift in Sources */,

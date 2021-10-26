@@ -7,16 +7,11 @@ protocol CreateStudentViewControllerDelegate: AnyObject {
 final class CreateStudentViewController: UIViewController {
     weak var delegate: CreateStudentViewControllerDelegate?
 
-    init() {
-        super.init(nibName: nil, bundle: nil)
-    }
-
-    required init(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        firstNameTextField.delegate = self
+        secondNameTextField.delegate = self
 
         setupViews()
     }
@@ -59,7 +54,7 @@ final class CreateStudentViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done,
                                                             target: self,
                                                             action: #selector(createStudent))
-        navigationItem.title = "Create Journal"
+        navigationItem.title = "Create student"
 
 
         view.addSubview(firstNameTextField)
@@ -87,5 +82,25 @@ final class CreateStudentViewController: UIViewController {
             secondNameTextField.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 10),
             secondNameTextField.heightAnchor.constraint(equalToConstant: 40)
         ])
+    }
+}
+
+// MARK: UITextFieldDelegate
+
+extension CreateStudentViewController: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if let text = textField.text,
+            let textRange = Range(range, in: text) {
+            let updatedText = text.replacingCharacters(in: textRange,
+                                                       with: string)
+
+            if updatedText.count > 12 {
+                return false
+            }
+
+            // можно провалидировать текст, например, что нет цифр (можно еще глянуть class MaskTextFieldAdapter)
+        }
+
+        return true
     }
 }

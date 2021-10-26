@@ -42,6 +42,11 @@ final class StudentsTableViewController: UITableViewController {
         40
     }
 
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let destination = SubjectsTableViewController(shouldShowCloseButton: false)
+        navigationController?.pushViewController(destination, animated: true)
+    }
+
     private func setupNavigationBar() {
         navigationItem.title = "Students"
 
