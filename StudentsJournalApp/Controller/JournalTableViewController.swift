@@ -2,7 +2,7 @@ import UIKit
 
 final class JournalTableViewController: UITableViewController {
     private let shouldShowCloseButton: Bool
-    private var items: [Journal] = []
+    private let journalModel = JournalModel()
     private let cellId = "cellId"
 
     init(shouldShowCloseButton: Bool) {
@@ -27,15 +27,23 @@ final class JournalTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! JournalCell
+        // в prepare for reuse отправлять пустую ячейку
 
-        cell.label.text = items[indexPath.row].group.groupName
+        let cells = journalModel.getJournals()
+
+        if !cells.isEmpty {
+            cell.label.text = cells[indexPath.row].group.groupName
+        }
+
         cell.journalTableViewController = self
 
         return cell
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        items.count
+        let cells = journalModel.getJournals()
+
+        return cells.count
     }
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -43,7 +51,11 @@ final class JournalTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let destination = StudentsTableViewController(shouldShowCloseButton: false)
+        let groups = journalModel.getJournals()
+        
+        let groupName = groups[indexPath.row].group.groupName // не исключен фатал
+
+        let destination = StudentsTableViewController(shouldShowCloseButton: false, navigationTitle: groupName)
         navigationController?.pushViewController(destination, animated: true)
     }
 
@@ -66,12 +78,12 @@ final class JournalTableViewController: UITableViewController {
     }
 
     private func insertCell(with model: Journal) {
-        items.append(model)
+        journalModel.addJournal(journal: model)
     }
 
     func deleteCell(cell: UITableViewCell) {
         if let deletionIndexPath = tableView.indexPath(for: cell) {
-            items.remove(at: deletionIndexPath.row)
+            journalModel.removeJournal(index: deletionIndexPath.row)
             tableView.deleteRows(at: [deletionIndexPath], with: .automatic)
         }
     }
@@ -89,7 +101,7 @@ final class JournalTableViewController: UITableViewController {
 extension JournalTableViewController: CreateJournalViewControllerDelegate {
     func createJournal(vc: CreateJournalViewController, didCreate journal: Journal) {
         insertCell(with: journal)
-        
+
         tableView.reloadData()
     }
 }

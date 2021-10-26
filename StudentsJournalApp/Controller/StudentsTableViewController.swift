@@ -2,11 +2,13 @@ import UIKit
 
 final class StudentsTableViewController: UITableViewController {
     private let shouldShowCloseButton: Bool
+    private let navigationTitle: String
     private let cellId = "cellId"
-    private var items: [Student] = []
+    private let journalModel = JournalModel()
 
-    init(shouldShowCloseButton: Bool) {
+    init(shouldShowCloseButton: Bool, navigationTitle: String) {
         self.shouldShowCloseButton = shouldShowCloseButton
+        self.navigationTitle = navigationTitle
 
         super.init(style: .plain)
     }
@@ -27,15 +29,23 @@ final class StudentsTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! StudentCell
+        // в prepare for reuse отправлять пустую ячейку
 
-        cell.studentName.text = "\(items[indexPath.row].firstName) \(items[indexPath.row].secondName)"
+        let cells = journalModel.getStudents(group: navigationTitle)
+
+        if !cells.isEmpty {
+            cell.studentName.text = "\(cells[indexPath.row].firstName) \(cells[indexPath.row].secondName)"
+        }
+
         cell.studentsTableViewController = self
 
         return cell
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        items.count
+        let cells = journalModel.getStudents(group: navigationTitle)
+
+        return cells.count
     }
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -48,7 +58,7 @@ final class StudentsTableViewController: UITableViewController {
     }
 
     private func setupNavigationBar() {
-        navigationItem.title = "Students"
+        navigationItem.title = "Students: \(navigationTitle)"
 
         if shouldShowCloseButton {
             navigationItem.leftBarButtonItem = UIBarButtonItem(
@@ -66,12 +76,12 @@ final class StudentsTableViewController: UITableViewController {
     }
 
     private func insertCell(with model: Student) {
-        items.append(model)
+        journalModel.addStudent(student: model, for: navigationTitle)
     }
 
     func deleteCell(cell: UITableViewCell) {
         if let deletionIndexPath = tableView.indexPath(for: cell) {
-            items.remove(at: deletionIndexPath.row)
+            journalModel.removeStudent(index: deletionIndexPath.row, by: navigationTitle)
             tableView.deleteRows(at: [deletionIndexPath], with: .automatic)
         }
     }

@@ -87,7 +87,7 @@ final class CreateSubjectViewController: UIViewController {
     }
 }
 
-// MARK: UITextFieldDelegate
+// MARK: CreateSubjectViewController + UITextFieldDelegate
 
 extension CreateSubjectViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
