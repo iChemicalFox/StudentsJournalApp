@@ -31,7 +31,6 @@ final class StudentCell: UITableViewCell {
         label.numberOfLines = 0
         label.textColor = .purple
         label.font = UIFont.systemFont(ofSize: 15)
-        label.text = "0,00" // временно
 
         return label
     }()

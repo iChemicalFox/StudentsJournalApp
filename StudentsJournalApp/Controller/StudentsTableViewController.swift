@@ -31,10 +31,26 @@ final class StudentsTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! StudentCell
         // в prepare for reuse отправлять пустую ячейку
 
-        let cells = journalModel.getStudents(group: navigationTitle)
+        let students = journalModel.getStudents(group: navigationTitle)
+        let studentName = students[indexPath.row].secondName
 
-        if !cells.isEmpty {
-            cell.studentName.text = "\(cells[indexPath.row].firstName) \(cells[indexPath.row].secondName)"
+        let averageRate = journalModel.getAverageRate(student: studentName) // нужно обновлять если был добавлен новый предмет
+
+        if !students.isEmpty {
+            cell.studentName.text = "\(students[indexPath.row].firstName) \(students[indexPath.row].secondName)"
+            cell.averageRate.text = "\(averageRate)"
+
+            if averageRate > 4 {
+                cell.averageRate.textColor = .green
+            }
+
+            if averageRate < 4 && averageRate > 3 {
+                cell.averageRate.textColor = .yellow
+            }
+
+            if averageRate > 2 && averageRate < 3 {
+                cell.averageRate.textColor = .red
+            }
         }
 
         cell.studentsTableViewController = self
@@ -53,7 +69,11 @@ final class StudentsTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let destination = SubjectsTableViewController(shouldShowCloseButton: false)
+        let students = journalModel.getStudents(group: navigationTitle)
+        
+        let studentName = students[indexPath.row].secondName // не исключен фатал
+
+        let destination = SubjectsTableViewController(shouldShowCloseButton: false, navigationTitle: studentName)
         navigationController?.pushViewController(destination, animated: true)
     }
 

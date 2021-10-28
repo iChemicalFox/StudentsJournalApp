@@ -3,10 +3,12 @@ import UIKit
 final class SubjectsTableViewController: UITableViewController {
     private let shouldShowCloseButton: Bool
     private let cellId = "cellId"
-    private var items: [Subject] = []
+    private let navigationTitle: String
+    private let journalModel = JournalModel()
 
-    init(shouldShowCloseButton: Bool) {
+    init(shouldShowCloseButton: Bool, navigationTitle: String) {
         self.shouldShowCloseButton = shouldShowCloseButton
+        self.navigationTitle = navigationTitle
 
         super.init(style: .plain)
     }
@@ -27,15 +29,24 @@ final class SubjectsTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! SubjectCell
+        // в prepare for reuse отправлять пустую ячейку
 
-        cell.subjectName.text = "\(items[indexPath.row].name) rating: \(items[indexPath.row].grade)"
+        let subjects = journalModel.getSubjects(student: navigationTitle)
+
+        if !subjects.isEmpty {
+            cell.subjectName.text = subjects[indexPath.row].name
+            cell.subjectRating.text = subjects[indexPath.row].grade.description
+        }
+
         cell.subjectsTableViewController = self
 
         return cell
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        items.count
+        let cells = journalModel.getSubjects(student: navigationTitle)
+
+        return cells.count
     }
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -43,7 +54,7 @@ final class SubjectsTableViewController: UITableViewController {
     }
 
     private func setupNavigationBar() {
-        navigationItem.title = "Subjects"
+        navigationItem.title = "Subjects: \(navigationTitle)"
 
         if shouldShowCloseButton {
             navigationItem.leftBarButtonItem = UIBarButtonItem(
@@ -61,12 +72,12 @@ final class SubjectsTableViewController: UITableViewController {
     }
 
     private func insertCell(with model: Subject) {
-        items.append(model)
+        journalModel.addSubject(subject: model, for: navigationTitle)
     }
 
     func deleteCell(cell: UITableViewCell) {
         if let deletionIndexPath = tableView.indexPath(for: cell) {
-            items.remove(at: deletionIndexPath.row)
+            journalModel.removeSubject(index: deletionIndexPath.row, by: navigationTitle)
             tableView.deleteRows(at: [deletionIndexPath], with: .automatic)
         }
     }

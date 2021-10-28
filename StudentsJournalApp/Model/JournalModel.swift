@@ -39,7 +39,7 @@ final class JournalModel {
     func removeJournal(index: Int) {
         var journals = getJournals()
 
-        if journals.isEmpty {
+        if journals.count < index {
             return
         }
 
@@ -49,7 +49,7 @@ final class JournalModel {
         if let encoded = try? encoder.encode(journals) {
             defaults.set(encoded, forKey: "Journals")
         } // слишком много действий: запросить журналы, сохранить в переменную, удалить из переменной значение, перезаписать defaults
-
+        
         // проверка
         if let savedJournal = defaults.object(forKey: "Journals") as? Data {
             let decoder = JSONDecoder()
@@ -94,7 +94,7 @@ final class JournalModel {
     func removeStudent(index: Int, by key: String) {
         var students = getStudents(group: key)
 
-        if students.isEmpty {
+        if students.count < index {
             return
         }
 
@@ -112,5 +112,77 @@ final class JournalModel {
                 print(loadedStudent)
             }
         }
+    }
+
+    func addSubject(subject: Subject, for student: String) {
+        // encode и decode массивов журнала
+        let encoder = JSONEncoder()
+        var subjects = getSubjects(student: student)
+        
+        subjects.append(subject)
+
+        if let encoded = try? encoder.encode(subjects) {
+            defaults.set(encoded, forKey: student)
+        }
+
+        // проверка
+        if let savedSubject = defaults.object(forKey: student) as? Data {
+            let decoder = JSONDecoder()
+            if let loadedSubject = try? decoder.decode([Subject].self, from: savedSubject) {
+                print(loadedSubject)
+            }
+        }
+    }
+
+    func getSubjects(student key: String) -> [Subject] {
+        if let savedSubjects = defaults.object(forKey: key) as? Data {
+            let decoder = JSONDecoder()
+
+            if let loadedSubjects = try? decoder.decode([Subject].self, from: savedSubjects) {
+                return loadedSubjects
+            }
+        }
+
+        return []
+    }
+
+    func removeSubject(index: Int, by key: String) {
+        var subjects = getSubjects(student: key)
+
+        if subjects.count < index {
+            return
+        }
+
+        subjects.remove(at: index)
+        let encoder = JSONEncoder()
+
+        if let encoded = try? encoder.encode(subjects) {
+            defaults.set(encoded, forKey: key)
+        } // слишком много действий: запросить предметы, сохранить в переменную, удалить из переменной значение, перезаписать defaults
+
+        // проверка
+        if let savedSubjects = defaults.object(forKey: key) as? Data {
+            let decoder = JSONDecoder()
+            if let loadedSubject = try? decoder.decode([Subject].self, from: savedSubjects) {
+                print(loadedSubject)
+            }
+        }
+    }
+
+    func getAverageRate(student key: String) -> Float {
+        let subjects = getSubjects(student: key)
+        var averageGrade: Float = 0.0
+
+        if subjects.isEmpty {
+            return averageGrade
+        }
+
+        _ = subjects.map {
+            averageGrade = Float($0.grade) + averageGrade
+        }
+
+        averageGrade = averageGrade / Float(subjects.count)
+
+        return averageGrade
     }
 }

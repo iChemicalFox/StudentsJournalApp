@@ -29,10 +29,10 @@ final class JournalTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! JournalCell
         // в prepare for reuse отправлять пустую ячейку
 
-        let cells = journalModel.getJournals()
+        let groups = journalModel.getJournals()
 
-        if !cells.isEmpty {
-            cell.label.text = cells[indexPath.row].group.groupName
+        if !groups.isEmpty {
+            cell.label.text = groups[indexPath.row].group.groupName
         }
 
         cell.journalTableViewController = self
@@ -91,7 +91,9 @@ final class JournalTableViewController: UITableViewController {
     @objc private func addNewJournal() {
         let viewController = CreateJournalViewController()
         let navigationController = UINavigationController(rootViewController: viewController)
+
         viewController.delegate = self
+
         present(navigationController, animated: true, completion: nil)
     }
 }
