@@ -35,8 +35,6 @@ final class JournalTableViewController: UITableViewController {
             cell.label.text = groups[indexPath.row].group.groupName
         }
 
-        cell.journalTableViewController = self
-
         return cell
     }
 
@@ -59,6 +57,21 @@ final class JournalTableViewController: UITableViewController {
         navigationController?.pushViewController(destination, animated: true)
     }
 
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            tableView.beginUpdates()
+        }
+
+        journalModel.removeJournal(index: indexPath.row)
+        tableView.deleteRows(at: [indexPath], with: .automatic)
+
+        tableView.endUpdates()
+    }
+
+//    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+//
+//    }
+
     private func setupNavigationBar() {
         navigationItem.title = "Journal"
 
@@ -79,13 +92,6 @@ final class JournalTableViewController: UITableViewController {
 
     private func insertCell(with model: Journal) {
         journalModel.addJournal(journal: model)
-    }
-
-    func deleteCell(cell: UITableViewCell) {
-        if let deletionIndexPath = tableView.indexPath(for: cell) {
-            journalModel.removeJournal(index: deletionIndexPath.row)
-            tableView.deleteRows(at: [deletionIndexPath], with: .automatic)
-        }
     }
 
     @objc private func addNewJournal() {

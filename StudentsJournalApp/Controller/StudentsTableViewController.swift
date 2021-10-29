@@ -40,20 +40,18 @@ final class StudentsTableViewController: UITableViewController {
             cell.studentName.text = "\(students[indexPath.row].firstName) \(students[indexPath.row].secondName)"
             cell.averageRate.text = "\(averageRate)"
 
-            if averageRate > 4 {
+            if averageRate >= 4 {
                 cell.averageRate.textColor = .green
             }
 
-            if averageRate < 4 && averageRate > 3 {
+            if averageRate < 4 && averageRate >= 3 {
                 cell.averageRate.textColor = .yellow
             }
 
-            if averageRate > 2 && averageRate < 3 {
+            if averageRate >= 2 && averageRate < 3 {
                 cell.averageRate.textColor = .red
             }
         }
-
-        cell.studentsTableViewController = self
 
         return cell
     }
@@ -77,6 +75,17 @@ final class StudentsTableViewController: UITableViewController {
         navigationController?.pushViewController(destination, animated: true)
     }
 
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            tableView.beginUpdates()
+        }
+
+        journalModel.removeStudent(index: indexPath.row, by: navigationTitle)
+        tableView.deleteRows(at: [indexPath], with: .automatic)
+
+        tableView.endUpdates()
+    }
+
     private func setupNavigationBar() {
         navigationItem.title = "Students: \(navigationTitle)"
 
@@ -97,13 +106,6 @@ final class StudentsTableViewController: UITableViewController {
 
     private func insertCell(with model: Student) {
         journalModel.addStudent(student: model, for: navigationTitle)
-    }
-
-    func deleteCell(cell: UITableViewCell) {
-        if let deletionIndexPath = tableView.indexPath(for: cell) {
-            journalModel.removeStudent(index: deletionIndexPath.row, by: navigationTitle)
-            tableView.deleteRows(at: [deletionIndexPath], with: .automatic)
-        }
     }
 
     @objc private func addNewStudent() {

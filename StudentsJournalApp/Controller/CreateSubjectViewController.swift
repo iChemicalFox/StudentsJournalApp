@@ -74,6 +74,7 @@ final class CreateSubjectViewController: UIViewController {
         ])
 
         view.addSubview(subjectRatingTextField)
+        subjectRatingTextField.keyboardType = .asciiCapableNumberPad
         subjectRatingTextField.placeholder = "Write the subject's rating"
         subjectRatingTextField.backgroundColor = .secondarySystemFill
         subjectRatingTextField.translatesAutoresizingMaskIntoConstraints = false
@@ -96,11 +97,19 @@ extension CreateSubjectViewController: UITextFieldDelegate {
             let updatedText = text.replacingCharacters(in: textRange,
                                                        with: string)
             
-            if updatedText.count > 12 {
-                return false
+            if textField == subjectNameTextField {
+                if updatedText.count > 16 {
+                    return false
+                }
+
+                textField.text = text.trimmingCharacters(in: .decimalDigits)
             }
-            
-            // можно провалидировать текст rating, что там только цифры
+
+            if textField == subjectRatingTextField {
+                if updatedText.count > 1 {
+                    return false
+                }
+            }
         }
 
         return true

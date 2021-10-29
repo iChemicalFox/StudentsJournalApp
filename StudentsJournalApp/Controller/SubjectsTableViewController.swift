@@ -38,8 +38,6 @@ final class SubjectsTableViewController: UITableViewController {
             cell.subjectRating.text = subjects[indexPath.row].grade.description
         }
 
-        cell.subjectsTableViewController = self
-
         return cell
     }
 
@@ -51,6 +49,17 @@ final class SubjectsTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         40
+    }
+
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            tableView.beginUpdates()
+        }
+
+        journalModel.removeSubject(index: indexPath.row, by: navigationTitle)
+        tableView.deleteRows(at: [indexPath], with: .automatic)
+
+        tableView.endUpdates()
     }
 
     private func setupNavigationBar() {
@@ -73,13 +82,6 @@ final class SubjectsTableViewController: UITableViewController {
 
     private func insertCell(with model: Subject) {
         journalModel.addSubject(subject: model, for: navigationTitle)
-    }
-
-    func deleteCell(cell: UITableViewCell) {
-        if let deletionIndexPath = tableView.indexPath(for: cell) {
-            journalModel.removeSubject(index: deletionIndexPath.row, by: navigationTitle)
-            tableView.deleteRows(at: [deletionIndexPath], with: .automatic)
-        }
     }
 
     @objc private func addNewStudent() {

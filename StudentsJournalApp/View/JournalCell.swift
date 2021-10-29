@@ -1,9 +1,6 @@
 import UIKit
 
 final class JournalCell: UITableViewCell {
-
-    weak var journalTableViewController: JournalTableViewController?
-
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupViews()
@@ -30,65 +27,17 @@ final class JournalCell: UITableViewCell {
         return label
     }()
 
-    let removeButton: UIButton = {
-        let button = UIButton()
-
-        button.backgroundColor = .clear
-        button.setTitle("Remove", for: .normal)
-        button.setTitleColor(.systemBlue, for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 15)
-
-        return button
-    }()
-
-    let editButton: UIButton = {
-        let button = UIButton()
-
-        button.backgroundColor = .clear
-        button.setTitle("Edit", for: .normal)
-        button.setTitleColor(.systemBlue, for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 15)
-
-        return button
-    }()
-
     private func setupViews() {
         backgroundColor = .clear
-
-        self.contentView.addSubview(removeButton)
-        removeButton.addTarget(self, action: #selector(handleRemoveAction), for: .touchUpInside)
-        removeButton.translatesAutoresizingMaskIntoConstraints = false
-
-        NSLayoutConstraint.activate([
-            removeButton.rightAnchor.constraint(equalTo: self.contentView.safeAreaLayoutGuide.rightAnchor, constant: -10),
-            removeButton.widthAnchor.constraint(equalToConstant: 60)
-        ])
-
-        self.contentView.addSubview(editButton)
-        editButton.addTarget(self, action: #selector(handleEditAction), for: .touchUpInside)
-        editButton.translatesAutoresizingMaskIntoConstraints = false
-
-        NSLayoutConstraint.activate([
-            editButton.rightAnchor.constraint(equalTo: removeButton.leftAnchor, constant: -10),
-            editButton.widthAnchor.constraint(equalToConstant: 60)
-        ])
 
         self.contentView.addSubview(label)
         label.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
             label.leftAnchor.constraint(equalTo: self.contentView.safeAreaLayoutGuide.leftAnchor, constant: 20),
-            label.rightAnchor.constraint(equalTo: editButton.leftAnchor, constant: -10),
+            label.rightAnchor.constraint(equalTo: self.contentView.rightAnchor, constant: -20),
             label.topAnchor.constraint(equalTo: self.contentView.safeAreaLayoutGuide.topAnchor, constant: 5),
             label.bottomAnchor.constraint(equalTo: self.contentView.safeAreaLayoutGuide.bottomAnchor, constant: -5)
         ])
-    }
-
-    @objc private func handleRemoveAction() {
-        journalTableViewController?.deleteCell(cell: self)
-    }
-
-    @objc private func handleEditAction() {
-        // TODO: edit group name
     }
 }

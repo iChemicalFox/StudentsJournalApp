@@ -98,7 +98,7 @@ extension CreateStudentViewController: UITextFieldDelegate {
                 return false
             }
 
-            // можно провалидировать текст, например, что нет цифр (можно еще глянуть class MaskTextFieldAdapter)
+            textField.text = text.trimmingCharacters(in: .decimalDigits)
         }
 
         return true

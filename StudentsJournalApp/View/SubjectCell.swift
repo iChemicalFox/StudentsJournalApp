@@ -1,8 +1,6 @@
 import UIKit
 
 final class SubjectCell: UITableViewCell {
-    var subjectsTableViewController: SubjectsTableViewController?
-
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupViews()
@@ -34,58 +32,17 @@ final class SubjectCell: UITableViewCell {
         return label
     }()
 
-    let removeButton: UIButton = {
-        let button = UIButton()
-
-        button.backgroundColor = .clear
-        button.setTitle("Remove", for: .normal)
-        button.setTitleColor(.systemBlue, for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 15)
-
-        return button
-    }()
-
-    let editButton: UIButton = {
-        let button = UIButton()
-
-        button.backgroundColor = .clear
-        button.setTitle("Edit", for: .normal)
-        button.setTitleColor(.systemBlue, for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 15)
-        button.translatesAutoresizingMaskIntoConstraints = false
-
-        return button
-    }()
-
     private func setupViews() {
         backgroundColor = .clear
-
-        self.contentView.addSubview(removeButton)
-        removeButton.addTarget(self, action: #selector(handleRemoveAction), for: .touchUpInside)
-        removeButton.translatesAutoresizingMaskIntoConstraints = false
-
-        NSLayoutConstraint.activate([
-            removeButton.rightAnchor.constraint(equalTo: self.contentView.safeAreaLayoutGuide.rightAnchor, constant: -10),
-            removeButton.widthAnchor.constraint(equalToConstant: 60)
-        ])
-
-        self.contentView.addSubview(editButton)
-        editButton.addTarget(self, action: #selector(handleEditAction), for: .touchUpInside)
-        editButton.translatesAutoresizingMaskIntoConstraints = false
-
-        NSLayoutConstraint.activate([
-            editButton.rightAnchor.constraint(equalTo: removeButton.leftAnchor, constant: -10),
-            editButton.widthAnchor.constraint(equalToConstant: 60)
-        ])
 
         self.contentView.addSubview(subjectRating)
         subjectRating.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
-            subjectRating.rightAnchor.constraint(equalTo: editButton.leftAnchor, constant: -10),
+            subjectRating.rightAnchor.constraint(equalTo: self.contentView.rightAnchor, constant: -5),
             subjectRating.topAnchor.constraint(equalTo: self.contentView.safeAreaLayoutGuide.topAnchor, constant: 5),
             subjectRating.bottomAnchor.constraint(equalTo: self.contentView.safeAreaLayoutGuide.bottomAnchor, constant: -5),
-            editButton.widthAnchor.constraint(equalToConstant: 30)
+            subjectRating.widthAnchor.constraint(equalToConstant: 20)
         ])
 
         self.contentView.addSubview(subjectName)
@@ -97,13 +54,5 @@ final class SubjectCell: UITableViewCell {
             subjectName.topAnchor.constraint(equalTo: self.contentView.safeAreaLayoutGuide.topAnchor, constant: 5),
             subjectName.bottomAnchor.constraint(equalTo: self.contentView.safeAreaLayoutGuide.bottomAnchor, constant: -5)
         ])
-    }
-
-    @objc private func handleRemoveAction() {
-        subjectsTableViewController?.deleteCell(cell: self)
-    }
-
-    @objc private func handleEditAction() {
-        // TODO: edit rating
     }
 }
