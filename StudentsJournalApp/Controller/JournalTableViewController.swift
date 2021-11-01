@@ -29,17 +29,17 @@ final class JournalTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! JournalCell
         // в prepare for reuse отправлять пустую ячейку
 
-        let groups = journalModel.getJournals()
+        let groups = journalModel.journals
 
         if !groups.isEmpty {
-            cell.label.text = groups[indexPath.row].group.groupName
+            cell.label.text = groups[indexPath.row].groupName
         }
 
         return cell
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let cells = journalModel.getJournals()
+        let cells = journalModel.journals
 
         return cells.count
     }
@@ -49,11 +49,11 @@ final class JournalTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let groups = journalModel.getJournals()
+        let groups = journalModel.journals
         
-        let groupName = groups[indexPath.row].group.groupName // не исключен фатал
+        let groupId = groups[indexPath.row].id // не исключен фатал
 
-        let destination = StudentsTableViewController(shouldShowCloseButton: false, navigationTitle: groupName)
+        let destination = StudentsTableViewController(shouldShowCloseButton: false, journalId: groupId)
         navigationController?.pushViewController(destination, animated: true)
     }
 
@@ -73,7 +73,7 @@ final class JournalTableViewController: UITableViewController {
 //    }
 
     private func setupNavigationBar() {
-        navigationItem.title = "Journal"
+        navigationItem.title = "Journals"
 
         if shouldShowCloseButton {
             navigationItem.leftBarButtonItem = UIBarButtonItem(
@@ -91,7 +91,7 @@ final class JournalTableViewController: UITableViewController {
     }
 
     private func insertCell(with model: Journal) {
-        journalModel.addJournal(journal: model)
+        journalModel.add(journal: model)
     }
 
     @objc private func addNewJournal() {

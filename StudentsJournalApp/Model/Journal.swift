@@ -1,21 +1,20 @@
 import Foundation
 
 struct Journal: Codable {
-    let group: Group
-}
-
-struct Group: Codable {
-    let groupName: String
-    let students: [Student]?
+    let id: String // UUID нулевой почти шанс что повториться
+    var groupName: String
+    var students: [Student]
 }
 
 struct Student: Codable {
-    let firstName: String
-    let secondName: String
-    let subjects: [Subject]?
+    let id: String
+    var firstName: String
+    var secondName: String
+    var subjects: [Subject]
 }
 
 struct Subject: Codable {
-    let name: String
-    let grade: Int
+    let id: String
+    var name: String
+    var grade: Int
 }

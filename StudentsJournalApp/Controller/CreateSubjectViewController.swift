@@ -46,7 +46,7 @@ final class CreateSubjectViewController: UIViewController {
 
         let subjectRatingInt = Int(subjectRating)
 
-        delegate?.createSubject(vc: self, didCreate: Subject(name: subjectName, grade: subjectRatingInt ?? 0))
+        delegate?.createSubject(vc: self, didCreate: Subject(id: UUID().uuidString, name: subjectName, grade: subjectRatingInt ?? 0))
         closeView()
     }
 

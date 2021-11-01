@@ -2,15 +2,18 @@ import UIKit
 
 final class StudentsTableViewController: UITableViewController {
     private let shouldShowCloseButton: Bool
-    private let navigationTitle: String
+    private let journalId: String
     private let cellId = "cellId"
     private let journalModel = JournalModel()
 
-    init(shouldShowCloseButton: Bool, navigationTitle: String) {
+    init(shouldShowCloseButton: Bool, journalId: String) {
         self.shouldShowCloseButton = shouldShowCloseButton
-        self.navigationTitle = navigationTitle
+        self.journalId = journalId
 
         super.init(style: .plain)
+
+        navigationItem.title = journalModel.getGroupName(by: journalId)
+
     }
 
     required init?(coder: NSCoder) {
@@ -31,10 +34,10 @@ final class StudentsTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! StudentCell
         // в prepare for reuse отправлять пустую ячейку
 
-        let students = journalModel.getStudents(group: navigationTitle)
-        let studentName = students[indexPath.row].secondName
+        let students = journalModel.getStudents(journalId: journalId)
+        let studentId = students[indexPath.row].id
 
-        let averageRate = journalModel.getAverageRate(student: studentName) // нужно обновлять если был добавлен новый предмет
+        let averageRate = journalModel.getAverageRate(studentId: studentId, journalId: journalId)
 
         if !students.isEmpty {
             cell.studentName.text = "\(students[indexPath.row].firstName) \(students[indexPath.row].secondName)"
@@ -57,7 +60,7 @@ final class StudentsTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let cells = journalModel.getStudents(group: navigationTitle)
+        let cells = journalModel.getStudents(journalId: journalId)
 
         return cells.count
     }
@@ -67,11 +70,11 @@ final class StudentsTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let students = journalModel.getStudents(group: navigationTitle)
+        let students = journalModel.getStudents(journalId: journalId)
         
-        let studentName = students[indexPath.row].secondName // не исключен фатал
+        let studentId = students[indexPath.row].id // не исключен фатал
 
-        let destination = SubjectsTableViewController(shouldShowCloseButton: false, navigationTitle: studentName)
+        let destination = SubjectsTableViewController(shouldShowCloseButton: false, journalId: journalId, studentId: studentId)
         navigationController?.pushViewController(destination, animated: true)
     }
 
@@ -80,15 +83,13 @@ final class StudentsTableViewController: UITableViewController {
             tableView.beginUpdates()
         }
 
-        journalModel.removeStudent(index: indexPath.row, by: navigationTitle)
+        journalModel.removeStudent(index: indexPath.row, journalId: journalId)
         tableView.deleteRows(at: [indexPath], with: .automatic)
 
         tableView.endUpdates()
     }
 
     private func setupNavigationBar() {
-        navigationItem.title = "Students: \(navigationTitle)"
-
         if shouldShowCloseButton {
             navigationItem.leftBarButtonItem = UIBarButtonItem(
                 title: "close",
@@ -105,7 +106,7 @@ final class StudentsTableViewController: UITableViewController {
     }
 
     private func insertCell(with model: Student) {
-        journalModel.addStudent(student: model, for: navigationTitle)
+        journalModel.add(student: model, for: journalId)
     }
 
     @objc private func addNewStudent() {

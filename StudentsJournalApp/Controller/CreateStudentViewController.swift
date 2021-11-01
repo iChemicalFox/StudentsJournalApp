@@ -44,7 +44,7 @@ final class CreateStudentViewController: UIViewController {
             return
         }
 
-        delegate?.createStudent(vc: self, didCreate: Student(firstName: firstName, secondName: secondName, subjects: nil))
+        delegate?.createStudent(vc: self, didCreate: Student(id: UUID().uuidString, firstName: firstName, secondName: secondName, subjects: []))
         closeView()
     }
 

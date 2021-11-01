@@ -1,176 +1,139 @@
 import Foundation
 
 final class JournalModel {
-    // можно вынести decoder и encoder в глобальные приватные константы, либо даже сделать протокол чтобы избавиться от повторений в коде
     private let defaults = UserDefaults.standard
+    private(set) var journals: [Journal]
 
-    func addJournal(journal: Journal) {  // может переделать в addGroup, а Key "Journals" в "Groups"?
-        // encode и decode массивов журнала
-        let encoder = JSONEncoder()
-        var journals = getJournals()
-        
-        journals.append(journal)
-
-        if let encoded = try? encoder.encode(journals) {
-            defaults.set(encoded, forKey: "Journals")
-        }
-
-        // проверка
-        if let savedJournal = defaults.object(forKey: "Journals") as? Data {
+    init() {
+        if let data = defaults.object(forKey: "Journal") as? Data {
             let decoder = JSONDecoder()
-            if let loadedJournal = try? decoder.decode([Journal].self, from: savedJournal) {
-                print(loadedJournal)
+            // Вопрос: в каком случае decode может упасть с ошибкой?
+            if let loadedJournals = try? decoder.decode([Journal].self, from: data) {
+                self.journals = loadedJournals
+            }  else {
+                self.journals = []
             }
+        } else {
+            self.journals = []
         }
     }
 
-    func getJournals() -> [Journal] {
-        if let savedJournal = defaults.object(forKey: "Journals") as? Data {
-            let decoder = JSONDecoder()
+    private func saveJournal() {
+        let encoder = JSONEncoder()
 
-            if let loadedJournal = try? decoder.decode([Journal].self, from: savedJournal) {
-                return loadedJournal
-            }
+        do {
+            let encoded = try encoder.encode(journals)
+            defaults.set(encoded, forKey: "Journal")
+        } catch {
+            assertionFailure(error.localizedDescription)
         }
+    }
 
-        return []
+    func add(journal: Journal) {
+        journals.append(journal)
+        saveJournal()
     }
 
     func removeJournal(index: Int) {
-        var journals = getJournals()
-
         if journals.count < index {
-            return
+            // ошибку бы сюда
         }
 
         journals.remove(at: index)
-        let encoder = JSONEncoder()
+        saveJournal()
+    }
 
-        if let encoded = try? encoder.encode(journals) {
-            defaults.set(encoded, forKey: "Journals")
-        } // слишком много действий: запросить журналы, сохранить в переменную, удалить из переменной значение, перезаписать defaults
-        
-        // проверка
-        if let savedJournal = defaults.object(forKey: "Journals") as? Data {
-            let decoder = JSONDecoder()
-            if let loadedJournal = try? decoder.decode([Journal].self, from: savedJournal) {
-                print(loadedJournal)
-            }
+    func getGroupName(by journalId: String) -> String {
+        let groups = journals.filter { $0.id == journalId }
+        if let groupName = groups.first?.groupName {
+           return "Group \(groupName)"
+        } else {
+            return "Group"
         }
     }
 
-    func addStudent(student: Student, for group: String) {
-        // encode и decode массивов журнала
-        let encoder = JSONEncoder()
-        var students = getStudents(group: group)
-        
-        students.append(student)
-
-        if let encoded = try? encoder.encode(students) {
-            defaults.set(encoded, forKey: group)
+    func add(student: Student, for journalId: String) { // проверить
+        if let index = journals.firstIndex(where: { $0.id == journalId }) {
+            journals[index].students.append(student)
+        } else {
+            assertionFailure("Didn't get journal by id")
         }
 
-        // проверка
-        if let savedStudent = defaults.object(forKey: group) as? Data {
-            let decoder = JSONDecoder()
-            if let loadedStudent = try? decoder.decode([Student].self, from: savedStudent) {
-                print(loadedStudent)
-            }
+        saveJournal()
+    }
+
+    func getStudents(journalId: String) -> [Student] {
+        if let index = journals.firstIndex(where: { $0.id == journalId }) {
+            return journals[index].students
+        } else {
+            return []
         }
     }
 
-    func getStudents(group key: String) -> [Student] {
-        if let savedStudents = defaults.object(forKey: key) as? Data {
-            let decoder = JSONDecoder()
-
-            if let loadedStudents = try? decoder.decode([Student].self, from: savedStudents) {
-                return loadedStudents
-            }
+    func removeStudent(index: Int, journalId: String) {
+        if let journalIndex = journals.firstIndex(where: { $0.id == journalId }) {
+            journals[journalIndex].students.remove(at: index)
+        } else {
+            assertionFailure("Didn't get journal by id")
         }
 
-        return []
+        saveJournal()
     }
 
-    func removeStudent(index: Int, by key: String) {
-        var students = getStudents(group: key)
-
-        if students.count < index {
-            return
-        }
-
-        students.remove(at: index)
-        let encoder = JSONEncoder()
-
-        if let encoded = try? encoder.encode(students) {
-            defaults.set(encoded, forKey: key)
-        } // слишком много действий: запросить студентов, сохранить в переменную, удалить из переменной значение, перезаписать defaults
-
-        // проверка
-        if let savedStudent = defaults.object(forKey: key) as? Data {
-            let decoder = JSONDecoder()
-            if let loadedStudent = try? decoder.decode([Student].self, from: savedStudent) {
-                print(loadedStudent)
+    func getStudentName(journalId: String, studentId: String) -> String {
+        if let groupIndex = journals.firstIndex(where: { $0.id == journalId }) {
+            if let studentIndex = journals[groupIndex].students.firstIndex(where: { $0.id == studentId } ) {
+                return "\(journals[groupIndex].students[studentIndex].firstName) \(journals[groupIndex].students[studentIndex].secondName)"
+            } else {
+                return "Unknown student"
             }
+        } else {
+            return "Unknown student"
         }
     }
 
-    func addSubject(subject: Subject, for student: String) {
-        // encode и decode массивов журнала
-        let encoder = JSONEncoder()
-        var subjects = getSubjects(student: student)
-        
-        subjects.append(subject)
-
-        if let encoded = try? encoder.encode(subjects) {
-            defaults.set(encoded, forKey: student)
+    func add(subject: Subject, for studentId: String, in journalId: String) {
+        if let groupIndex = journals.firstIndex(where: { $0.id == journalId }) {
+            if let studentIndex = journals[groupIndex].students.firstIndex(where: { $0.id == studentId } ) {
+                journals[groupIndex].students[studentIndex].subjects.append(subject)
+            } else {
+                assertionFailure("Didn't get student by id")
+            }
+        } else {
+            assertionFailure("Didn't get journal by id")
         }
 
-        // проверка
-        if let savedSubject = defaults.object(forKey: student) as? Data {
-            let decoder = JSONDecoder()
-            if let loadedSubject = try? decoder.decode([Subject].self, from: savedSubject) {
-                print(loadedSubject)
+        saveJournal()
+    }
+
+    func getSubjects(studentId: String, journalId: String) -> [Subject] {
+        if let groupIndex = journals.firstIndex(where: { $0.id == journalId }) {
+            if let studentIndex = journals[groupIndex].students.firstIndex(where: { $0.id == studentId } ) {
+                return journals[groupIndex].students[studentIndex].subjects
+            } else {
+                return []
             }
+        } else {
+            return []
         }
     }
 
-    func getSubjects(student key: String) -> [Subject] {
-        if let savedSubjects = defaults.object(forKey: key) as? Data {
-            let decoder = JSONDecoder()
-
-            if let loadedSubjects = try? decoder.decode([Subject].self, from: savedSubjects) {
-                return loadedSubjects
+    func removeSubject(index: Int, studentId: String, journalId: String) {
+        if let groupIndex = journals.firstIndex(where: { $0.id == journalId }) {
+            if let studentIndex = journals[groupIndex].students.firstIndex(where: { $0.id == studentId } ) {
+                journals[groupIndex].students[studentIndex].subjects.remove(at: index)
+            } else {
+                assertionFailure("Didn't get student by id")
             }
+        } else {
+            assertionFailure("Didn't get journal by id")
         }
 
-        return []
+        saveJournal()
     }
 
-    func removeSubject(index: Int, by key: String) {
-        var subjects = getSubjects(student: key)
-
-        if subjects.count < index {
-            return
-        }
-
-        subjects.remove(at: index)
-        let encoder = JSONEncoder()
-
-        if let encoded = try? encoder.encode(subjects) {
-            defaults.set(encoded, forKey: key)
-        } // слишком много действий: запросить предметы, сохранить в переменную, удалить из переменной значение, перезаписать defaults
-
-        // проверка
-        if let savedSubjects = defaults.object(forKey: key) as? Data {
-            let decoder = JSONDecoder()
-            if let loadedSubject = try? decoder.decode([Subject].self, from: savedSubjects) {
-                print(loadedSubject)
-            }
-        }
-    }
-
-    func getAverageRate(student key: String) -> Float {
-        let subjects = getSubjects(student: key)
+    func getAverageRate(studentId: String, journalId: String) -> Float {
+        let subjects = getSubjects(studentId: studentId, journalId: journalId)
         var averageGrade: Float = 0.0
 
         if subjects.isEmpty {

@@ -35,7 +35,7 @@ final class CreateJournalViewController: UIViewController {
             return
         }
 
-        delegate?.createJournal(vc: self, didCreate: Journal(group: Group(groupName: text, students: nil)))
+        delegate?.createJournal(vc: self, didCreate: Journal(id: UUID().uuidString, groupName: text, students: []))
         closeView()
     }
 

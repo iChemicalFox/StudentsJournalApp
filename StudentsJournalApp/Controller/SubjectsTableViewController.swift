@@ -2,13 +2,15 @@ import UIKit
 
 final class SubjectsTableViewController: UITableViewController {
     private let shouldShowCloseButton: Bool
+    private let studentId: String
+    private let journalId: String
     private let cellId = "cellId"
-    private let navigationTitle: String
     private let journalModel = JournalModel()
 
-    init(shouldShowCloseButton: Bool, navigationTitle: String) {
+    init(shouldShowCloseButton: Bool, journalId: String, studentId: String) {
         self.shouldShowCloseButton = shouldShowCloseButton
-        self.navigationTitle = navigationTitle
+        self.journalId = journalId
+        self.studentId = studentId
 
         super.init(style: .plain)
     }
@@ -31,7 +33,7 @@ final class SubjectsTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! SubjectCell
         // в prepare for reuse отправлять пустую ячейку
 
-        let subjects = journalModel.getSubjects(student: navigationTitle)
+        let subjects = journalModel.getSubjects(studentId: studentId, journalId: journalId)
 
         if !subjects.isEmpty {
             cell.subjectName.text = subjects[indexPath.row].name
@@ -42,7 +44,7 @@ final class SubjectsTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let cells = journalModel.getSubjects(student: navigationTitle)
+        let cells = journalModel.getSubjects(studentId: studentId, journalId: journalId)
 
         return cells.count
     }
@@ -56,14 +58,14 @@ final class SubjectsTableViewController: UITableViewController {
             tableView.beginUpdates()
         }
 
-        journalModel.removeSubject(index: indexPath.row, by: navigationTitle)
+        journalModel.removeSubject(index: indexPath.row, studentId: studentId, journalId: journalId)
         tableView.deleteRows(at: [indexPath], with: .automatic)
 
         tableView.endUpdates()
     }
 
     private func setupNavigationBar() {
-        navigationItem.title = "Subjects: \(navigationTitle)"
+        navigationItem.title = journalModel.getStudentName(journalId: journalId, studentId: studentId)
 
         if shouldShowCloseButton {
             navigationItem.leftBarButtonItem = UIBarButtonItem(
@@ -81,7 +83,7 @@ final class SubjectsTableViewController: UITableViewController {
     }
 
     private func insertCell(with model: Subject) {
-        journalModel.addSubject(subject: model, for: navigationTitle)
+        journalModel.add(subject: model, for: studentId, in: journalId)
     }
 
     @objc private func addNewStudent() {
