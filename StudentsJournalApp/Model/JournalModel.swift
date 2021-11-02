@@ -46,13 +46,13 @@ final class JournalModel {
     func getGroupName(by journalId: String) -> String {
         let groups = journals.filter { $0.id == journalId }
         if let groupName = groups.first?.groupName {
-           return "Group \(groupName)"
+           return "\(NSLocalizedString("Group", comment: "")) \(groupName)"
         } else {
-            return "Group"
+            return "\(NSLocalizedString("Group", comment: ""))"
         }
     }
 
-    func add(student: Student, for journalId: String) { // проверить
+    func add(student: Student, for journalId: String) {
         if let index = journals.firstIndex(where: { $0.id == journalId }) {
             journals[index].students.append(student)
         } else {

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		02668A6F271077510023A331 /* SubjectsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02668A6E271077510023A331 /* SubjectsTableViewController.swift */; };
+		027F30A42731637800CAE61B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 027F30A62731637800CAE61B /* Localizable.strings */; };
 		02828948271DB3AB00C91B40 /* JournalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02828947271DB3AB00C91B40 /* JournalCell.swift */; };
 		02828989271DCDFF00C91B40 /* StudentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02828988271DCDFF00C91B40 /* StudentCell.swift */; };
 		0282898B271DD2A900C91B40 /* CreateStudentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0282898A271DD2A900C91B40 /* CreateStudentViewController.swift */; };
@@ -46,6 +47,8 @@
 
 /* Begin PBXFileReference section */
 		02668A6E271077510023A331 /* SubjectsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectsTableViewController.swift; sourceTree = "<group>"; };
+		027F30A12731636000CAE61B /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		027F30A52731637800CAE61B /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		02828947271DB3AB00C91B40 /* JournalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalCell.swift; sourceTree = "<group>"; };
 		02828988271DCDFF00C91B40 /* StudentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentCell.swift; sourceTree = "<group>"; };
 		0282898A271DD2A900C91B40 /* CreateStudentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateStudentViewController.swift; sourceTree = "<group>"; };
@@ -157,6 +160,7 @@
 				028B7B932709C61F0028C1B7 /* Assets.xcassets */,
 				028B7B952709C61F0028C1B7 /* LaunchScreen.storyboard */,
 				028B7B982709C61F0028C1B7 /* Info.plist */,
+				027F30A62731637800CAE61B /* Localizable.strings */,
 			);
 			path = StudentsJournalApp;
 			sourceTree = "<group>";
@@ -264,6 +268,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ru,
 			);
 			mainGroup = 028B7B7E2709C61D0028C1B7;
 			productRefGroup = 028B7B882709C61D0028C1B7 /* Products */;
@@ -283,6 +288,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				028B7B972709C61F0028C1B7 /* LaunchScreen.storyboard in Resources */,
+				027F30A42731637800CAE61B /* Localizable.strings in Resources */,
 				028B7B942709C61F0028C1B7 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -357,10 +363,19 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		027F30A62731637800CAE61B /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				027F30A52731637800CAE61B /* ru */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		028B7B952709C61F0028C1B7 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				028B7B962709C61F0028C1B7 /* Base */,
+				027F30A12731636000CAE61B /* ru */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -372,6 +387,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -433,6 +449,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";

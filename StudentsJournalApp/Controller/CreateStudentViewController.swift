@@ -54,7 +54,7 @@ final class CreateStudentViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done,
                                                             target: self,
                                                             action: #selector(createStudent))
-        navigationItem.title = "Create student"
+        navigationItem.title = NSLocalizedString("Create student", comment: "")
 
 
         view.addSubview(firstNameTextField)

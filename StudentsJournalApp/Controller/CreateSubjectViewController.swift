@@ -56,12 +56,10 @@ final class CreateSubjectViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done,
                                                             target: self,
                                                             action: #selector(createSubject))
-        navigationItem.title = "Create Subject"
+        navigationItem.title = NSLocalizedString("Create subject", comment: "")
 
 
         view.addSubview(subjectNameTextField)
-//        TODO: "".trimmingCharacters - подписавшись на делегат
-//        TODO: subjectRatingTextField.addTarget(self, action: <#T##Selector#>, for: .valueChanged) - в селектор будут отправляться изменения
         subjectNameTextField.placeholder = "Write the subject's name"
         subjectNameTextField.backgroundColor = .secondarySystemFill
         subjectNameTextField.translatesAutoresizingMaskIntoConstraints = false

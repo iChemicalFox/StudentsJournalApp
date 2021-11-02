@@ -3,7 +3,6 @@ import UIKit
 final class JournalTableViewController: UITableViewController {
     private let shouldShowCloseButton: Bool
     private let journalModel = JournalModel()
-    private let cellId = "cellId"
 
     init(shouldShowCloseButton: Bool) {
         self.shouldShowCloseButton = shouldShowCloseButton
@@ -22,11 +21,11 @@ final class JournalTableViewController: UITableViewController {
 
         setupNavigationBar()
 
-        tableView.register(JournalCell.self, forCellReuseIdentifier: cellId)
+        tableView.register(JournalCell.self, forCellReuseIdentifier: "\(JournalCell.self)")
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! JournalCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "\(JournalCell.self)", for: indexPath) as! JournalCell
         // в prepare for reuse отправлять пустую ячейку
 
         let groups = journalModel.journals
@@ -73,7 +72,7 @@ final class JournalTableViewController: UITableViewController {
 //    }
 
     private func setupNavigationBar() {
-        navigationItem.title = "Journals"
+        navigationItem.title = NSLocalizedString("Journals", comment: "")
 
         if shouldShowCloseButton {
             navigationItem.leftBarButtonItem = UIBarButtonItem(

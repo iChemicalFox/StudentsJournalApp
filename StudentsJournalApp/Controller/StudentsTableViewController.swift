@@ -3,7 +3,6 @@ import UIKit
 final class StudentsTableViewController: UITableViewController {
     private let shouldShowCloseButton: Bool
     private let journalId: String
-    private let cellId = "cellId"
     private let journalModel = JournalModel()
 
     init(shouldShowCloseButton: Bool, journalId: String) {
@@ -27,11 +26,11 @@ final class StudentsTableViewController: UITableViewController {
 
         setupNavigationBar()
 
-        tableView.register(StudentCell.self, forCellReuseIdentifier: cellId)
+        tableView.register(StudentCell.self, forCellReuseIdentifier: "\(StudentCell.self)")
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! StudentCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "\(StudentCell.self)", for: indexPath) as! StudentCell
         // в prepare for reuse отправлять пустую ячейку
 
         let students = journalModel.getStudents(journalId: journalId)

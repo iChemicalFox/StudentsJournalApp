@@ -1,0 +1,13 @@
+/* 
+  Localizable.strings
+  StudentsJournalApp
+
+  Created by Алексей Слоневский on 02.11.2021.
+  
+*/
+
+"Journals" = "Журналы";
+"Group" = "Группа";
+"Create journal" = "Добавить журнал";
+"Create student" = "Добавить студента";
+"Create Subject" = "Добавить предмет";

@@ -45,12 +45,10 @@ final class CreateJournalViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done,
                                                             target: self,
                                                             action: #selector(createJournal))
-        navigationItem.title = "Create journal"
+        navigationItem.title = NSLocalizedString("Create journal", comment: "")
 
 
         view.addSubview(textField)
-//        TODO: "".trimmingCharacters - подписавшись на делегат
-//        TODO: firstField.addTarget(self, action: <#T##Selector#>, for: .valueChanged) - в селектор будут отправляться изменения
         textField.placeholder = "Write the group number"
         textField.backgroundColor = .secondarySystemFill
         textField.translatesAutoresizingMaskIntoConstraints = false
