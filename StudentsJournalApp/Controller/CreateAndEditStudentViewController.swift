@@ -1,11 +1,26 @@
 import UIKit
 
-protocol CreateStudentViewControllerDelegate: AnyObject {
-    func createStudent(vc: CreateStudentViewController, didCreate student: Student)
+protocol CreateAndEditStudentViewControllerDelegate: AnyObject {
+    func createStudent(vc: CreateAndEditStudentViewController, didCreate student: Student)
+    func editStudent(vc: CreateAndEditStudentViewController, student: Student, newFirstName: String, newSecondName: String)
 }
 
-final class CreateStudentViewController: UIViewController {
-    weak var delegate: CreateStudentViewControllerDelegate?
+final class CreateAndEditStudentViewController: UIViewController {
+    let state: State
+    let student: Student?
+
+    weak var delegate: CreateAndEditStudentViewControllerDelegate?
+
+    init(state: State, student: Student? = nil) {
+        self.state = state
+        self.student = student
+
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,19 +63,45 @@ final class CreateStudentViewController: UIViewController {
         closeView()
     }
 
+    @objc private func editStudent() {
+        guard let firstNameText = firstNameTextField.text else {
+            closeView()
+            return
+        }
+
+        guard let secondNameText = secondNameTextField.text else {
+            closeView()
+            return
+        }
+
+        guard let student = student else { return }
+
+        delegate?.editStudent(vc: self, student: student, newFirstName: firstNameText, newSecondName: secondNameText)
+        closeView()
+    }
+
     private func setupViews() {
         view.backgroundColor = .white
 
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done,
-                                                            target: self,
-                                                            action: #selector(createStudent))
-        navigationItem.title = NSLocalizedString("Create student", comment: "")
+        if state == .create {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done,
+                                                                target: self,
+                                                                action: #selector(createStudent))
+            navigationItem.title = NSLocalizedString("Create student", comment: "")
+        }
 
+        if state == .edit {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done,
+                                                                target: self,
+                                                                action: #selector(editStudent))
+            navigationItem.title = NSLocalizedString("Edit student", comment: "")
+
+            firstNameTextField.text = student?.firstName
+            secondNameTextField.text = student?.secondName
+        }
 
         view.addSubview(firstNameTextField)
-//        TODO: "".trimmingCharacters - подписавшись на делегат
-//        TODO: firstField.addTarget(self, action: <#T##Selector#>, for: .valueChanged) - в селектор будут отправляться изменения
-        firstNameTextField.placeholder = "Write the first name"
+        firstNameTextField.placeholder = NSLocalizedString("Write the first name", comment: "")
         firstNameTextField.backgroundColor = .secondarySystemFill
         firstNameTextField.translatesAutoresizingMaskIntoConstraints = false
 
@@ -72,7 +113,7 @@ final class CreateStudentViewController: UIViewController {
         ])
 
         view.addSubview(secondNameTextField)
-        secondNameTextField.placeholder = "Write the second name"
+        secondNameTextField.placeholder = NSLocalizedString("Write the second name", comment: "")
         secondNameTextField.backgroundColor = .secondarySystemFill
         secondNameTextField.translatesAutoresizingMaskIntoConstraints = false
 
@@ -87,7 +128,7 @@ final class CreateStudentViewController: UIViewController {
 
 // MARK: CreateStudentViewController + UITextFieldDelegate
 
-extension CreateStudentViewController: UITextFieldDelegate {
+extension CreateAndEditStudentViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if let text = textField.text,
             let textRange = Range(range, in: text) {
@@ -102,5 +143,14 @@ extension CreateStudentViewController: UITextFieldDelegate {
         }
 
         return true
+    }
+}
+
+// MARK: CreateAndEditStudentViewController + State
+
+extension CreateAndEditStudentViewController {
+    enum State {
+        case edit
+        case create
     }
 }

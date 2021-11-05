@@ -12,7 +12,6 @@ final class StudentsTableViewController: UITableViewController {
         super.init(style: .plain)
 
         navigationItem.title = journalModel.getGroupName(by: journalId)
-
     }
 
     required init?(coder: NSCoder) {
@@ -61,6 +60,10 @@ final class StudentsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let cells = journalModel.getStudents(journalId: journalId)
 
+        if cells.count >= 25 {
+            navigationItem.rightBarButtonItem?.isEnabled = false
+        }
+
         return cells.count
     }
 
@@ -88,6 +91,34 @@ final class StudentsTableViewController: UITableViewController {
         tableView.endUpdates()
     }
 
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .destructive,
+                                              title: NSLocalizedString("Delete", comment: "")) { [weak journalModel, journalId] (action, view, handler) in
+            guard let model = journalModel else { return }
+
+            tableView.beginUpdates()
+
+            model.removeStudent(index: indexPath.row, journalId: journalId)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+
+            tableView.endUpdates()
+        }
+
+        let editAction = UIContextualAction(style: .normal,
+                                            title: NSLocalizedString("Edit", comment: "")) { [weak self, journalModel, journalId] (action, view, handler) in
+            let students = journalModel.getStudents(journalId: journalId)
+            let student = students[indexPath.row]
+            self?.editStudent(student: student)
+        }
+
+        editAction.backgroundColor = .gray
+        deleteAction.backgroundColor = .red
+        let configuration = UISwipeActionsConfiguration(actions: [deleteAction, editAction])
+        configuration.performsFirstActionWithFullSwipe = false
+
+        return configuration
+    }
+
     private func setupNavigationBar() {
         if shouldShowCloseButton {
             navigationItem.leftBarButtonItem = UIBarButtonItem(
@@ -104,12 +135,17 @@ final class StudentsTableViewController: UITableViewController {
         }
     }
 
-    private func insertCell(with model: Student) {
-        journalModel.add(student: model, for: journalId)
+    private func editStudent(student: Student) {
+        let viewController = CreateAndEditStudentViewController(state: .edit, student: student)
+        let navigationController = UINavigationController(rootViewController: viewController)
+
+        viewController.delegate = self
+
+        present(navigationController, animated: true, completion: nil)
     }
 
     @objc private func addNewStudent() {
-        let viewController = CreateStudentViewController()
+        let viewController = CreateAndEditStudentViewController(state: .create)
         let navigationController = UINavigationController(rootViewController: viewController)
         viewController.delegate = self
         present(navigationController, animated: true, completion: nil)
@@ -118,9 +154,15 @@ final class StudentsTableViewController: UITableViewController {
 
 // MARK: StudentsTableViewController + CreateStudentViewControllerDelegate
 
-extension StudentsTableViewController: CreateStudentViewControllerDelegate {
-    func createStudent(vc: CreateStudentViewController, didCreate student: Student) {
-        insertCell(with: student)
+extension StudentsTableViewController: CreateAndEditStudentViewControllerDelegate {
+    func editStudent(vc: CreateAndEditStudentViewController, student: Student, newFirstName: String, newSecondName: String) {
+        journalModel.editStudent(student: student, journalId: journalId, newFirstName: newFirstName, newSecondName: newSecondName)
+
+        tableView.reloadData()
+    }
+
+    func createStudent(vc: CreateAndEditStudentViewController, didCreate student: Student) {
+        journalModel.add(student: student, for: journalId)
         
         tableView.reloadData()
     }

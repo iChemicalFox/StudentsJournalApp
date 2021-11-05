@@ -29,6 +29,8 @@ final class JournalModel {
         }
     }
 
+    // MARK: Journal
+
     func add(journal: Journal) {
         journals.append(journal)
         saveJournal()
@@ -36,7 +38,7 @@ final class JournalModel {
 
     func removeJournal(index: Int) {
         if journals.count < index {
-            // ошибку бы сюда
+            assertionFailure("Index greater than journals count")
         }
 
         journals.remove(at: index)
@@ -51,6 +53,19 @@ final class JournalModel {
             return "\(NSLocalizedString("Group", comment: ""))"
         }
     }
+
+    func editGroupName(journal: Journal, newValue: String) {
+        let id = journal.id
+        if let index = journals.firstIndex(where: { $0.id == id }) {
+            journals[index].groupName = newValue
+        } else {
+            assertionFailure("Didn't get journal by id")
+        }
+
+        saveJournal()
+    }
+
+    // MARK: Student
 
     func add(student: Student, for journalId: String) {
         if let index = journals.firstIndex(where: { $0.id == journalId }) {
@@ -80,6 +95,21 @@ final class JournalModel {
         saveJournal()
     }
 
+    func editStudent(student: Student, journalId: String, newFirstName: String, newSecondName: String) {
+        if let journalIndex = journals.firstIndex(where: { $0.id == journalId }) {
+            if let studentIndex = journals[journalIndex].students.firstIndex(where: { $0.id == student.id }) {
+                journals[journalIndex].students[studentIndex].secondName = newSecondName
+                journals[journalIndex].students[studentIndex].firstName = newFirstName
+                } else {
+                    return assertionFailure("Didn't get student by id")
+                }
+            } else {
+                assertionFailure("Didn't get journal by id")
+            }
+
+        saveJournal()
+    }
+
     func getStudentName(journalId: String, studentId: String) -> String {
         if let groupIndex = journals.firstIndex(where: { $0.id == journalId }) {
             if let studentIndex = journals[groupIndex].students.firstIndex(where: { $0.id == studentId } ) {
@@ -91,6 +121,8 @@ final class JournalModel {
             return "Unknown student"
         }
     }
+
+    // MARK: Subject
 
     func add(subject: Subject, for studentId: String, in journalId: String) {
         if let groupIndex = journals.firstIndex(where: { $0.id == journalId }) {

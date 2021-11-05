@@ -60,7 +60,7 @@ final class CreateSubjectViewController: UIViewController {
 
 
         view.addSubview(subjectNameTextField)
-        subjectNameTextField.placeholder = "Write the subject's name"
+        subjectNameTextField.placeholder = NSLocalizedString("Write the subject's name", comment: "")
         subjectNameTextField.backgroundColor = .secondarySystemFill
         subjectNameTextField.translatesAutoresizingMaskIntoConstraints = false
 
@@ -73,7 +73,7 @@ final class CreateSubjectViewController: UIViewController {
 
         view.addSubview(subjectRatingTextField)
         subjectRatingTextField.keyboardType = .asciiCapableNumberPad
-        subjectRatingTextField.placeholder = "Write the subject's rating"
+        subjectRatingTextField.placeholder = NSLocalizedString("Write the subject's rating", comment: "")
         subjectRatingTextField.backgroundColor = .secondarySystemFill
         subjectRatingTextField.translatesAutoresizingMaskIntoConstraints = false
 

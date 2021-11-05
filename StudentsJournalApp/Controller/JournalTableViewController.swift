@@ -40,6 +40,10 @@ final class JournalTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let cells = journalModel.journals
 
+        if cells.count > 10 {
+            navigationItem.rightBarButtonItem?.isEnabled = false
+        }
+
         return cells.count
     }
 
@@ -56,20 +60,37 @@ final class JournalTableViewController: UITableViewController {
         navigationController?.pushViewController(destination, animated: true)
     }
 
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .destructive,
+                                              title: NSLocalizedString("Delete", comment: "")) { [weak journalModel] (action, view, handler) in
+            guard let model = journalModel else { return }
+
             tableView.beginUpdates()
+
+            model.removeJournal(index: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+
+            tableView.endUpdates()
         }
 
-        journalModel.removeJournal(index: indexPath.row)
-        tableView.deleteRows(at: [indexPath], with: .automatic)
+        let editAction = UIContextualAction(style: .normal,
+                                            title: NSLocalizedString("Edit", comment: "")) { [weak self, journalModel] (action, view, handler) in
 
-        tableView.endUpdates()
+            let journal = journalModel.journals[indexPath.row]
+            self?.editJournal(journal: journal)
+        }
+
+        editAction.backgroundColor = .gray
+        deleteAction.backgroundColor = .red
+        let configuration = UISwipeActionsConfiguration(actions: [deleteAction, editAction])
+        configuration.performsFirstActionWithFullSwipe = false
+
+        return configuration
     }
 
-//    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-//
-//    }
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
 
     private func setupNavigationBar() {
         navigationItem.title = NSLocalizedString("Journals", comment: "")
@@ -89,12 +110,17 @@ final class JournalTableViewController: UITableViewController {
         }
     }
 
-    private func insertCell(with model: Journal) {
-        journalModel.add(journal: model)
+    @objc private func addNewJournal() {
+        let viewController = CreateAndEditJournalViewController(state: .create)
+        let navigationController = UINavigationController(rootViewController: viewController)
+
+        viewController.delegate = self
+
+        present(navigationController, animated: true, completion: nil)
     }
 
-    @objc private func addNewJournal() {
-        let viewController = CreateJournalViewController()
+    private func editJournal(journal: Journal) {
+        let viewController = CreateAndEditJournalViewController(state: .edit, journal: journal)
         let navigationController = UINavigationController(rootViewController: viewController)
 
         viewController.delegate = self
@@ -105,9 +131,15 @@ final class JournalTableViewController: UITableViewController {
 
 // MARK: JournalTableViewController + CreateJournalViewControllerDelegate
 
-extension JournalTableViewController: CreateJournalViewControllerDelegate {
-    func createJournal(vc: CreateJournalViewController, didCreate journal: Journal) {
-        insertCell(with: journal)
+extension JournalTableViewController: CreateAndEditJournalViewControllerDelegate {
+    func createJournal(vc: CreateAndEditJournalViewController, didCreate journal: Journal) {
+        journalModel.add(journal: journal)
+
+        tableView.reloadData()
+    }
+
+    func editJournalName(vc: CreateAndEditJournalViewController, journal: Journal, newName: String) {
+        journalModel.editGroupName(journal: journal, newValue: newName)
 
         tableView.reloadData()
     }
