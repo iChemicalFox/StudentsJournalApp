@@ -1,8 +1,8 @@
 import UIKit
 
 protocol CreateAndEditStudentViewControllerDelegate: AnyObject {
-    func createStudent(vc: CreateAndEditStudentViewController, didCreate student: Student)
-    func editStudent(vc: CreateAndEditStudentViewController, student: Student, newFirstName: String, newSecondName: String)
+    func createStudentDidClose(vc: CreateAndEditStudentViewController, didCreate student: Student)
+    func editStudentDidClose(vc: CreateAndEditStudentViewController, student: Student, newFirstName: String, newSecondName: String)
 }
 
 final class CreateAndEditStudentViewController: UIViewController {
@@ -47,37 +47,26 @@ final class CreateAndEditStudentViewController: UIViewController {
         return textField
     }()
 
-    @objc private func closeView() {
-        navigationController?.popViewController(animated: true)
-
-        dismiss(animated: true, completion: nil) // TODO: закрывать в StudentsTableViewController
-    }
-
     @objc private func createStudent() {
         guard let firstName = firstNameTextField.text, let secondName = secondNameTextField.text else {
-            closeView()
             return
         }
 
-        delegate?.createStudent(vc: self, didCreate: Student(id: UUID().uuidString, firstName: firstName, secondName: secondName, subjects: []))
-        closeView()
+        delegate?.createStudentDidClose(vc: self, didCreate: Student(id: UUID().uuidString, firstName: firstName, secondName: secondName, subjects: []))
     }
 
     @objc private func editStudent() {
         guard let firstNameText = firstNameTextField.text else {
-            closeView()
             return
         }
 
         guard let secondNameText = secondNameTextField.text else {
-            closeView()
             return
         }
 
         guard let student = student else { return }
 
-        delegate?.editStudent(vc: self, student: student, newFirstName: firstNameText, newSecondName: secondNameText)
-        closeView()
+        delegate?.editStudentDidClose(vc: self, student: student, newFirstName: firstNameText, newSecondName: secondNameText)
     }
 
     private func setupViews() {

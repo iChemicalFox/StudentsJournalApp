@@ -1,7 +1,7 @@
 import UIKit
 
 protocol CreateSubjectViewControllerDelegate: AnyObject {
-    func createSubject(vc: CreateSubjectViewController, didCreate student: Subject)
+    func createSubjectDidClose(vc: CreateSubjectViewController, didCreate student: Subject)
 }
 
 final class CreateSubjectViewController: UIViewController {
@@ -32,22 +32,14 @@ final class CreateSubjectViewController: UIViewController {
         return textField
     }()
 
-    @objc private func closeView() {
-        navigationController?.popViewController(animated: true)
-
-        dismiss(animated: true, completion: nil) // TODO: закрывать в SubjectsTableViewController
-    }
-
     @objc private func createSubject() {
         guard let subjectName = subjectNameTextField.text, let subjectRating = subjectRatingTextField.text else {
-            closeView()
             return
         }
 
         let subjectRatingInt = Int(subjectRating)
 
-        delegate?.createSubject(vc: self, didCreate: Subject(id: UUID().uuidString, name: subjectName, grade: subjectRatingInt ?? 0))
-        closeView()
+        delegate?.createSubjectDidClose(vc: self, didCreate: Subject(id: UUID().uuidString, name: subjectName, grade: subjectRatingInt ?? 0))
     }
 
     private func setupViews() {

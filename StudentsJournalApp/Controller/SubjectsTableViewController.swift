@@ -96,9 +96,10 @@ final class SubjectsTableViewController: UITableViewController {
 // MARK: SubjectsTableViewController + CreateSubjectViewControllerDelegate
 
 extension SubjectsTableViewController: CreateSubjectViewControllerDelegate {
-    func createSubject(vc: CreateSubjectViewController, didCreate subject: Subject) {
+    func createSubjectDidClose(vc: CreateSubjectViewController, didCreate subject: Subject) {
         insertCell(with: subject)
         
         tableView.reloadData()
+        vc.dismiss(animated: true, completion: nil)
     }
 }

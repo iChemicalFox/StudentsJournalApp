@@ -155,15 +155,17 @@ final class StudentsTableViewController: UITableViewController {
 // MARK: StudentsTableViewController + CreateStudentViewControllerDelegate
 
 extension StudentsTableViewController: CreateAndEditStudentViewControllerDelegate {
-    func editStudent(vc: CreateAndEditStudentViewController, student: Student, newFirstName: String, newSecondName: String) {
+    func editStudentDidClose(vc: CreateAndEditStudentViewController, student: Student, newFirstName: String, newSecondName: String) {
         journalModel.editStudent(student: student, journalId: journalId, newFirstName: newFirstName, newSecondName: newSecondName)
 
         tableView.reloadData()
+        vc.dismiss(animated: true, completion: nil)
     }
 
-    func createStudent(vc: CreateAndEditStudentViewController, didCreate student: Student) {
+    func createStudentDidClose(vc: CreateAndEditStudentViewController, didCreate student: Student) {
         journalModel.add(student: student, for: journalId)
         
         tableView.reloadData()
+        vc.dismiss(animated: true, completion: nil)
     }
 }

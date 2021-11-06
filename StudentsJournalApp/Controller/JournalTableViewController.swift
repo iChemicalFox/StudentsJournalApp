@@ -132,15 +132,17 @@ final class JournalTableViewController: UITableViewController {
 // MARK: JournalTableViewController + CreateJournalViewControllerDelegate
 
 extension JournalTableViewController: CreateAndEditJournalViewControllerDelegate {
-    func createJournal(vc: CreateAndEditJournalViewController, didCreate journal: Journal) {
+    func createJournalDidClose(vc: CreateAndEditJournalViewController, didCreate journal: Journal) {
         journalModel.add(journal: journal)
 
         tableView.reloadData()
+        vc.dismiss(animated: true, completion: nil)
     }
 
-    func editJournalName(vc: CreateAndEditJournalViewController, journal: Journal, newName: String) {
+    func editJournalNameDidClose(vc: CreateAndEditJournalViewController, journal: Journal, newName: String) {
         journalModel.editGroupName(journal: journal, newValue: newName)
 
         tableView.reloadData()
+        vc.dismiss(animated: true, completion: nil)
     }
 }

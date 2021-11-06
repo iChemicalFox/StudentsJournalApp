@@ -1,8 +1,8 @@
 import UIKit
 
 protocol CreateAndEditJournalViewControllerDelegate: AnyObject {
-    func createJournal(vc: CreateAndEditJournalViewController, didCreate journal: Journal)
-    func editJournalName(vc: CreateAndEditJournalViewController, journal: Journal, newName: String)
+    func createJournalDidClose(vc: CreateAndEditJournalViewController, didCreate journal: Journal)
+    func editJournalNameDidClose(vc: CreateAndEditJournalViewController, journal: Journal, newName: String)
 }
 
 final class CreateAndEditJournalViewController: UIViewController {
@@ -38,32 +38,22 @@ final class CreateAndEditJournalViewController: UIViewController {
         return textField
     }()
 
-    @objc private func closeView() {
-        navigationController?.popViewController(animated: true)
-
-        dismiss(animated: true, completion: nil) // TODO: закрывать в JournalTableViewController
-    }
-
     @objc private func createJournal() {
         guard let text = textField.text else {
-            closeView()
             return
         }
 
-        delegate?.createJournal(vc: self, didCreate: Journal(id: UUID().uuidString, groupName: text, students: []))
-        closeView()
+        delegate?.createJournalDidClose(vc: self, didCreate: Journal(id: UUID().uuidString, groupName: text, students: []))
     }
 
     @objc private func editJournalName() {
         guard let text = textField.text else {
-            closeView()
             return
         }
 
         guard let journal = journal else { return }
 
-        delegate?.editJournalName(vc: self, journal: journal, newName: text)
-        closeView()
+        delegate?.editJournalNameDidClose(vc: self, journal: journal, newName: text)
     }
 
     private func setupViews() {
