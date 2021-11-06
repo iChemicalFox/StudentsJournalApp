@@ -39,7 +39,7 @@ final class StudentsTableViewController: UITableViewController {
 
         if !students.isEmpty {
             cell.studentName.text = "\(students[indexPath.row].firstName) \(students[indexPath.row].secondName)"
-            cell.averageRate.text = "\(averageRate)"
+            cell.averageRate.text = String(format: "%.2f", averageRate)
 
             if averageRate >= 4 {
                 cell.averageRate.textColor = .green
