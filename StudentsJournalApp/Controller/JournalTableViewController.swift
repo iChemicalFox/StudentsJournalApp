@@ -111,7 +111,7 @@ final class JournalTableViewController: UITableViewController {
     }
 
     @objc private func addNewJournal() {
-        let viewController = CreateAndEditJournalViewController(state: .create)
+        let viewController = CreateAndEditJournalViewController()
         let navigationController = UINavigationController(rootViewController: viewController)
 
         viewController.delegate = self
@@ -120,7 +120,7 @@ final class JournalTableViewController: UITableViewController {
     }
 
     private func editJournal(journal: Journal) {
-        let viewController = CreateAndEditJournalViewController(state: .edit, journal: journal)
+        let viewController = CreateAndEditJournalViewController(journal: journal)
         let navigationController = UINavigationController(rootViewController: viewController)
 
         viewController.delegate = self

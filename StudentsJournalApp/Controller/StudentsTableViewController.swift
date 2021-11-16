@@ -136,7 +136,7 @@ final class StudentsTableViewController: UITableViewController {
     }
 
     private func editStudent(student: Student) {
-        let viewController = CreateAndEditStudentViewController(state: .edit, student: student)
+        let viewController = CreateAndEditStudentViewController(student: student)
         let navigationController = UINavigationController(rootViewController: viewController)
 
         viewController.delegate = self
@@ -145,7 +145,7 @@ final class StudentsTableViewController: UITableViewController {
     }
 
     @objc private func addNewStudent() {
-        let viewController = CreateAndEditStudentViewController(state: .create)
+        let viewController = CreateAndEditStudentViewController()
         let navigationController = UINavigationController(rootViewController: viewController)
         viewController.delegate = self
         present(navigationController, animated: true, completion: nil)
