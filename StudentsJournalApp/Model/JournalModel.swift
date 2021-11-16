@@ -18,7 +18,7 @@ final class JournalModel {
         }
     }
 
-    private func saveJournal() {
+    private func saveJournals() {
         let encoder = JSONEncoder()
 
         do {
@@ -33,7 +33,7 @@ final class JournalModel {
 
     func add(journal: Journal) {
         journals.append(journal)
-        saveJournal()
+        saveJournals()
     }
 
     func removeJournal(index: Int) {
@@ -42,12 +42,12 @@ final class JournalModel {
         }
 
         journals.remove(at: index)
-        saveJournal()
+        saveJournals()
     }
 
     func getGroupName(by journalId: String) -> String {
-        let groups = journals.filter { $0.id == journalId }
-        if let groupName = groups.first?.groupName {
+        let filteredJournals = journals.filter { $0.id == journalId }
+        if let groupName = filteredJournals.first?.groupName {
            return "\(NSLocalizedString("Group", comment: "")) \(groupName)"
         } else {
             return "\(NSLocalizedString("Group", comment: ""))"
@@ -62,15 +62,11 @@ final class JournalModel {
             assertionFailure("Didn't get journal by id")
         }
 
-        saveJournal()
+        saveJournals()
     }
 
     func getGroupIndex(by journalId: String) -> Int? {
-        if let index = journals.firstIndex(where: { $0.id == journalId }) {
-            return index
-        } else {
-            return nil
-        }
+        journals.firstIndex(where: { $0.id == journalId })
     }
 
     // MARK: Student
@@ -82,7 +78,7 @@ final class JournalModel {
             assertionFailure("Didn't get journal by id")
         }
 
-        saveJournal()
+        saveJournals()
     }
 
     func getStudents(journalId: String) -> [Student] {
@@ -100,7 +96,7 @@ final class JournalModel {
             assertionFailure("Didn't get journal by id")
         }
 
-        saveJournal()
+        saveJournals()
     }
 
     func editStudent(student: Student, journalId: String, newFirstName: String, newSecondName: String) {
@@ -108,14 +104,14 @@ final class JournalModel {
             if let studentIndex = journals[groupIndex].students.firstIndex(where: { $0.id == student.id }) {
                 journals[groupIndex].students[studentIndex].secondName = newSecondName
                 journals[groupIndex].students[studentIndex].firstName = newFirstName
-                } else {
-                    return assertionFailure("Didn't get student by id")
-                }
             } else {
-                assertionFailure("Didn't get journal by id")
+                assertionFailure("Didn't get student by id")
             }
+        } else {
+            assertionFailure("Didn't get journal by id")
+        }
 
-        saveJournal()
+        saveJournals()
     }
 
     func getStudentName(journalId: String, studentId: String) -> String {
@@ -143,7 +139,7 @@ final class JournalModel {
             assertionFailure("Didn't get journal by id")
         }
 
-        saveJournal()
+        saveJournals()
     }
 
     func getSubjects(studentId: String, journalId: String) -> [Subject] {
@@ -169,7 +165,7 @@ final class JournalModel {
             assertionFailure("Didn't get journal by id")
         }
 
-        saveJournal()
+        saveJournals()
     }
 
     func getAverageRate(studentId: String, journalId: String) -> Float {

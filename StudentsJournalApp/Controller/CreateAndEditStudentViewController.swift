@@ -11,9 +11,14 @@ final class CreateAndEditStudentViewController: UIViewController {
 
     weak var delegate: CreateAndEditStudentViewControllerDelegate?
 
-    init(state: State, student: Student? = nil) {
-        self.state = state
+    init(student: Student? = nil) {
         self.student = student
+
+        if student == nil {
+            self.state = .create
+        } else {
+            self.state = .edit
+        }
 
         super.init(nibName: nil, bundle: nil)
     }
@@ -72,14 +77,8 @@ final class CreateAndEditStudentViewController: UIViewController {
     private func setupViews() {
         view.backgroundColor = .white
 
-        if state == .create {
-            navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done,
-                                                                target: self,
-                                                                action: #selector(createStudent))
-            navigationItem.title = NSLocalizedString("Create student", comment: "")
-        }
-
-        if state == .edit {
+        switch state {
+        case .edit:
             navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done,
                                                                 target: self,
                                                                 action: #selector(editStudent))
@@ -87,6 +86,12 @@ final class CreateAndEditStudentViewController: UIViewController {
 
             firstNameTextField.text = student?.firstName
             secondNameTextField.text = student?.secondName
+
+        case .create:
+            navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done,
+                                                                target: self,
+                                                                action: #selector(createStudent))
+            navigationItem.title = NSLocalizedString("Create student", comment: "")
         }
 
         view.addSubview(firstNameTextField)
@@ -121,8 +126,10 @@ extension CreateAndEditStudentViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if let text = textField.text,
             let textRange = Range(range, in: text) {
-            let updatedText = text.replacingCharacters(in: textRange,
-                                                       with: string)
+            let updatedText = text.replacingCharacters(
+                in: textRange,
+                with: string
+            )
 
             if updatedText.count > 12 {
                 return false

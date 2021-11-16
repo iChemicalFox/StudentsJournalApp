@@ -11,9 +11,14 @@ final class CreateAndEditJournalViewController: UIViewController {
 
     weak var delegate: CreateAndEditJournalViewControllerDelegate?
 
-    init(state: State, journal: Journal? = nil) {
-        self.state = state
+    init(journal: Journal? = nil) {
         self.journal = journal
+
+        if journal == nil {
+            self.state = .create
+        } else {
+            self.state = .edit
+        }
 
         super.init(nibName: nil, bundle: nil)
     }
@@ -47,11 +52,7 @@ final class CreateAndEditJournalViewController: UIViewController {
     }
 
     @objc private func editJournalName() {
-        guard let text = textField.text else {
-            return
-        }
-
-        guard let journal = journal else { return }
+        guard let text = textField.text, let journal = journal else { return }
 
         delegate?.editJournalNameDidClose(vc: self, journal: journal, newName: text)
     }
@@ -59,12 +60,14 @@ final class CreateAndEditJournalViewController: UIViewController {
     private func setupViews() {
         view.backgroundColor = .white
 
-        if state == .create {
+        switch state {
+        case .create:
             navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done,
                                                                 target: self,
                                                                 action: #selector(createJournal))
             navigationItem.title = NSLocalizedString("Create journal", comment: "")
-        } else {
+
+        case .edit:
             navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done,
                                                                 target: self,
                                                                 action: #selector(editJournalName))
@@ -72,7 +75,6 @@ final class CreateAndEditJournalViewController: UIViewController {
 
             textField.text = journal?.groupName
         }
-
 
         view.addSubview(textField)
         textField.placeholder = NSLocalizedString("Write the group number", comment: "")
@@ -93,8 +95,10 @@ extension CreateAndEditJournalViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if let text = textField.text,
             let textRange = Range(range, in: text) {
-            let updatedText = text.replacingCharacters(in: textRange,
-                                                       with: string)
+            let updatedText = text.replacingCharacters(
+                in: textRange,
+                with: string
+            )
 
             if updatedText.count > 5 {
                 return false
