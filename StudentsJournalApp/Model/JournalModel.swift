@@ -5,15 +5,16 @@ final class JournalModel {
     private(set) var journals: [Journal]
 
     init() {
-        if let data = defaults.object(forKey: "Journal") as? Data {
-            let decoder = JSONDecoder()
-            // Вопрос: в каком случае decode может упасть с ошибкой?
-            if let loadedJournals = try? decoder.decode([Journal].self, from: data) {
-                self.journals = loadedJournals
-            }  else {
-                self.journals = []
-            }
-        } else {
+        guard let data = defaults.object(forKey: "Journal") as? Data else {
+            self.journals = []
+            return
+        }
+
+        let decoder = JSONDecoder()
+        // Вопрос: в каком случае decode может упасть с ошибкой?
+        if let loadedJournals = try? decoder.decode([Journal].self, from: data) {
+            self.journals = loadedJournals
+        }  else {
             self.journals = []
         }
     }
@@ -47,6 +48,7 @@ final class JournalModel {
 
     func getGroupName(by journalId: String) -> String {
         let filteredJournals = journals.filter { $0.id == journalId }
+
         if let groupName = filteredJournals.first?.groupName {
            return "\(NSLocalizedString("Group", comment: "")) \(groupName)"
         } else {
@@ -56,6 +58,7 @@ final class JournalModel {
 
     func editGroupName(journal: Journal, newValue: String) {
         let id = journal.id
+
         if let index = journals.firstIndex(where: { $0.id == id }) {
             journals[index].groupName = newValue
         } else {
@@ -100,71 +103,54 @@ final class JournalModel {
     }
 
     func editStudent(student: Student, journalId: String, newFirstName: String, newSecondName: String) {
-        if let groupIndex = getGroupIndex(by: journalId) {
-            if let studentIndex = journals[groupIndex].students.firstIndex(where: { $0.id == student.id }) {
-                journals[groupIndex].students[studentIndex].secondName = newSecondName
-                journals[groupIndex].students[studentIndex].firstName = newFirstName
-            } else {
-                assertionFailure("Didn't get student by id")
-            }
-        } else {
-            assertionFailure("Didn't get journal by id")
+        guard let groupIndex = getGroupIndex(by: journalId),
+              let studentIndex = journals[groupIndex].students.firstIndex(where: { $0.id == student.id }) else {
+            return assertionFailure("Didn't get student by id")
         }
+
+        journals[groupIndex].students[studentIndex].secondName = newSecondName
+        journals[groupIndex].students[studentIndex].firstName = newFirstName
 
         saveJournals()
     }
 
     func getStudentName(journalId: String, studentId: String) -> String {
-        if let groupIndex = getGroupIndex(by: journalId) {
-            if let studentIndex = journals[groupIndex].students.firstIndex(where: { $0.id == studentId } ) {
-                return "\(journals[groupIndex].students[studentIndex].firstName) \(journals[groupIndex].students[studentIndex].secondName)"
-            } else {
-                return "Unknown student"
-            }
-        } else {
-            return "Unknown student"
+        guard let groupIndex = getGroupIndex(by: journalId),
+              let studentIndex = journals[groupIndex].students.firstIndex(where: { $0.id == studentId }) else {
+            return NSLocalizedString("Unknown student", comment: "")
         }
+
+        return "\(journals[groupIndex].students[studentIndex].firstName) \(journals[groupIndex].students[studentIndex].secondName)"
     }
 
     // MARK: Subject
 
     func add(subject: Subject, for studentId: String, in journalId: String) {
-        if let groupIndex = getGroupIndex(by: journalId) {
-            if let studentIndex = journals[groupIndex].students.firstIndex(where: { $0.id == studentId } ) {
-                journals[groupIndex].students[studentIndex].subjects.append(subject)
-            } else {
-                assertionFailure("Didn't get student by id")
-            }
-        } else {
-            assertionFailure("Didn't get journal by id")
-        }
+        guard let groupIndex = getGroupIndex(by: journalId),
+              let studentIndex = journals[groupIndex].students.firstIndex(where: { $0.id == studentId } ) else {
+                  return assertionFailure("Didn't get student by id")
+              }
 
+        journals[groupIndex].students[studentIndex].subjects.append(subject)
         saveJournals()
     }
 
     func getSubjects(studentId: String, journalId: String) -> [Subject] {
-        if let groupIndex = getGroupIndex(by: journalId) {
-            if let studentIndex = journals[groupIndex].students.firstIndex(where: { $0.id == studentId } ) {
-                return journals[groupIndex].students[studentIndex].subjects
-            } else {
-                return []
-            }
-        } else {
-            return []
-        }
+        guard let groupIndex = getGroupIndex(by: journalId),
+              let studentIndex = journals[groupIndex].students.firstIndex(where: { $0.id == studentId } ) else {
+                  return []
+              }
+
+        return journals[groupIndex].students[studentIndex].subjects
     }
 
     func removeSubject(index: Int, studentId: String, journalId: String) {
-        if let groupIndex = getGroupIndex(by: journalId) {
-            if let studentIndex = journals[groupIndex].students.firstIndex(where: { $0.id == studentId } ) {
-                journals[groupIndex].students[studentIndex].subjects.remove(at: index)
-            } else {
-                assertionFailure("Didn't get student by id")
-            }
-        } else {
-            assertionFailure("Didn't get journal by id")
-        }
+        guard let groupIndex = getGroupIndex(by: journalId),
+              let studentIndex = journals[groupIndex].students.firstIndex(where: { $0.id == studentId } ) else {
+                  return assertionFailure("Didn't get student by id")
+              }
 
+        journals[groupIndex].students[studentIndex].subjects.remove(at: index)
         saveJournals()
     }
 

@@ -3,6 +3,8 @@ import UIKit
 final class JournalTableViewController: UITableViewController {
     private let shouldShowCloseButton: Bool
     private let journalModel = JournalModel()
+    private let groupLimit = 10
+    private let cellHeight: CGFloat = 40
 
     init(shouldShowCloseButton: Bool) {
         self.shouldShowCloseButton = shouldShowCloseButton
@@ -31,7 +33,7 @@ final class JournalTableViewController: UITableViewController {
         let groups = journalModel.journals
 
         if !groups.isEmpty {
-            cell.label.text = groups[indexPath.row].groupName
+            cell.textLabel?.text = groups[indexPath.row].groupName
         }
 
         return cell
@@ -40,7 +42,7 @@ final class JournalTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let cells = journalModel.journals
 
-        if cells.count > 10 {
+        if cells.count > groupLimit {
             navigationItem.rightBarButtonItem?.isEnabled = false
         }
 
@@ -48,7 +50,7 @@ final class JournalTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        40
+        cellHeight
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

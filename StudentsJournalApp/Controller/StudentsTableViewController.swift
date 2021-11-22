@@ -4,6 +4,8 @@ final class StudentsTableViewController: UITableViewController {
     private let shouldShowCloseButton: Bool
     private let journalId: String
     private let journalModel = JournalModel()
+    private let studentLimit = 25
+    private let cellHeight: CGFloat = 40
 
     init(shouldShowCloseButton: Bool, journalId: String) {
         self.shouldShowCloseButton = shouldShowCloseButton
@@ -25,11 +27,11 @@ final class StudentsTableViewController: UITableViewController {
 
         setupNavigationBar()
 
-        tableView.register(StudentCell.self, forCellReuseIdentifier: "\(StudentCell.self)")
+        tableView.register(ValueCell.self, forCellReuseIdentifier: "\(ValueCell.self)")
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "\(StudentCell.self)", for: indexPath) as! StudentCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "\(ValueCell.self)", for: indexPath) as! ValueCell
         // в prepare for reuse отправлять пустую ячейку
 
         let students = journalModel.getStudents(journalId: journalId)
@@ -38,19 +40,20 @@ final class StudentsTableViewController: UITableViewController {
         let averageRate = journalModel.getAverageRate(studentId: studentId, journalId: journalId)
 
         if !students.isEmpty {
-            cell.studentName.text = "\(students[indexPath.row].firstName) \(students[indexPath.row].secondName)"
-            cell.averageRate.text = String(format: "%.2f", averageRate)
+            cell.render(
+                title: "\(students[indexPath.row].firstName) \(students[indexPath.row].secondName)",
+                value: String(format: "%.2f", averageRate)
+            )
 
-            if averageRate >= 4 {
-                cell.averageRate.textColor = .green
-            }
-
-            if averageRate < 4 && averageRate >= 3 {
-                cell.averageRate.textColor = .yellow
-            }
-
-            if averageRate >= 2 && averageRate < 3 {
-                cell.averageRate.textColor = .red
+            switch averageRate {
+            case 4...5:
+                cell.setValueColor(.green)
+            case 3...3.99:
+                cell.setValueColor(.yellow)
+            case 2...2.99:
+                cell.setValueColor(.red)
+            default:
+                cell.setValueColor(.gray)
             }
         }
 
@@ -60,7 +63,7 @@ final class StudentsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let cells = journalModel.getStudents(journalId: journalId)
 
-        if cells.count >= 25 {
+        if cells.count >= studentLimit {
             navigationItem.rightBarButtonItem?.isEnabled = false
         }
 
@@ -68,7 +71,7 @@ final class StudentsTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        40
+        cellHeight
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

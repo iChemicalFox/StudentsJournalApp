@@ -5,6 +5,7 @@ final class SubjectsTableViewController: UITableViewController {
     private let studentId: String
     private let journalId: String
     private let journalModel = JournalModel()
+    private let cellHeight: CGFloat = 40
 
     init(shouldShowCloseButton: Bool, journalId: String, studentId: String) {
         self.shouldShowCloseButton = shouldShowCloseButton
@@ -25,18 +26,20 @@ final class SubjectsTableViewController: UITableViewController {
 
         setupNavigationBar()
 
-        tableView.register(SubjectCell.self, forCellReuseIdentifier: "\(SubjectCell.self)")
+        tableView.register(ValueCell.self, forCellReuseIdentifier: "\(ValueCell.self)")
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "\(SubjectCell.self)", for: indexPath) as! SubjectCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "\(ValueCell.self)", for: indexPath) as! ValueCell
         // в prepare for reuse отправлять пустую ячейку
 
         let subjects = journalModel.getSubjects(studentId: studentId, journalId: journalId)
 
         if !subjects.isEmpty {
-            cell.subjectName.text = subjects[indexPath.row].name
-            cell.subjectRating.text = subjects[indexPath.row].grade.description
+            cell.render(
+                title: subjects[indexPath.row].name,
+                value: subjects[indexPath.row].grade.description
+            )
         }
 
         return cell
@@ -49,7 +52,7 @@ final class SubjectsTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        40
+        cellHeight
     }
 
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {

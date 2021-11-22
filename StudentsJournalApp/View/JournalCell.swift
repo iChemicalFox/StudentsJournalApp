@@ -2,7 +2,7 @@ import UIKit
 
 final class JournalCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        super.init(style: .default, reuseIdentifier: reuseIdentifier)
         setupViews()
     }
 
@@ -13,31 +13,19 @@ final class JournalCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
 
-        label.text = nil // очистка тут и в других ячейках
+        textLabel?.text = nil // очистка тут и в других ячейках
     }
 
-    let label: UILabel = {
-        let label = UILabel()
-
-        label.backgroundColor = .clear
-        label.numberOfLines = 0
-        label.textColor = .black
-        label.font = UIFont.systemFont(ofSize: 15)
-
-        return label
-    }()
+    private func configure(textColor: UIColor) {
+        textLabel?.backgroundColor = .clear
+        textLabel?.numberOfLines = 0
+        textLabel?.textColor = textColor
+        textLabel?.font = UIFont.systemFont(ofSize: 15)
+    }
 
     private func setupViews() {
-        backgroundColor = .clear
+        backgroundColor = .white
 
-        self.contentView.addSubview(label)
-        label.translatesAutoresizingMaskIntoConstraints = false
-
-        NSLayoutConstraint.activate([
-            label.leftAnchor.constraint(equalTo: self.contentView.safeAreaLayoutGuide.leftAnchor, constant: 20),
-            label.rightAnchor.constraint(equalTo: self.contentView.rightAnchor, constant: -20),
-            label.topAnchor.constraint(equalTo: self.contentView.safeAreaLayoutGuide.topAnchor, constant: 5),
-            label.bottomAnchor.constraint(equalTo: self.contentView.safeAreaLayoutGuide.bottomAnchor, constant: -5)
-        ])
+        configure(textColor: .black)
     }
 }
