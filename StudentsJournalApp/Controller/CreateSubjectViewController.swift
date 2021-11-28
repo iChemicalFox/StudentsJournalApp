@@ -20,6 +20,7 @@ final class CreateSubjectViewController: UIViewController {
         let textField = UITextField()
 
         textField.backgroundColor = .white
+        textField.layer.cornerRadius = 6
 
         return textField
     }()
@@ -28,6 +29,7 @@ final class CreateSubjectViewController: UIViewController {
         let textField = UITextField()
 
         textField.backgroundColor = .white
+        textField.layer.cornerRadius = 6
 
         return textField
     }()

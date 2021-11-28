@@ -56,11 +56,11 @@ final class JournalModel {
         }
     }
 
-    func editGroupName(journal: Journal, newValue: String) {
+    func editGroupName(journal: Journal) {
         let id = journal.id
 
         if let index = journals.firstIndex(where: { $0.id == id }) {
-            journals[index].groupName = newValue
+            journals[index].groupName = journal.groupName
         } else {
             assertionFailure("Didn't get journal by id")
         }
@@ -102,14 +102,14 @@ final class JournalModel {
         saveJournals()
     }
 
-    func editStudent(student: Student, journalId: String, newFirstName: String, newSecondName: String) {
+    func edit(student: Student, journalId: String) {
         guard let groupIndex = getGroupIndex(by: journalId),
               let studentIndex = journals[groupIndex].students.firstIndex(where: { $0.id == student.id }) else {
             return assertionFailure("Didn't get student by id")
         }
 
-        journals[groupIndex].students[studentIndex].secondName = newSecondName
-        journals[groupIndex].students[studentIndex].firstName = newFirstName
+        journals[groupIndex].students[studentIndex].secondName = student.secondName
+        journals[groupIndex].students[studentIndex].firstName = student.firstName
 
         saveJournals()
     }

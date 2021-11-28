@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		02668A6F271077510023A331 /* SubjectsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02668A6E271077510023A331 /* SubjectsTableViewController.swift */; };
 		027F30A42731637800CAE61B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 027F30A62731637800CAE61B /* Localizable.strings */; };
-		027F30AB2737EB7100CAE61B /* UIColor+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027F30AA2737EB7100CAE61B /* UIColor+extensions.swift */; };
 		02828948271DB3AB00C91B40 /* JournalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02828947271DB3AB00C91B40 /* JournalCell.swift */; };
 		0282898B271DD2A900C91B40 /* CreateAndEditStudentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0282898A271DD2A900C91B40 /* CreateAndEditStudentViewController.swift */; };
 		0282898D271EAE1A00C91B40 /* Journal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0282898C271EAE1A00C91B40 /* Journal.swift */; };
@@ -25,6 +24,8 @@
 		028B7BC7270CA34E0028C1B7 /* CreateAndEditJournalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028B7BC6270CA34E0028C1B7 /* CreateAndEditJournalViewController.swift */; };
 		028B7BCB270DB0F00028C1B7 /* StudentsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028B7BCA270DB0F00028C1B7 /* StudentsTableViewController.swift */; };
 		029E28A5274C276800364813 /* ValueCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029E28A4274C276800364813 /* ValueCell.swift */; };
+		02C123FC2753FD37000593D4 /* HTMLColors.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02C123F82753FD07000593D4 /* HTMLColors.framework */; };
+		02C123FD2753FD37000593D4 /* HTMLColors.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 02C123F82753FD07000593D4 /* HTMLColors.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		02C45DC22726FDF600ACE6D3 /* JournalModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C45DC12726FDF600ACE6D3 /* JournalModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -43,13 +44,33 @@
 			remoteGlobalIDString = 028B7B862709C61D0028C1B7;
 			remoteInfo = StudentsJournalApp;
 		};
+		02C123F72753FD07000593D4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 02C123F32753FD06000593D4 /* HTMLColors.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 02C123E92753FD06000593D4;
+			remoteInfo = HTMLColors;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		02C123B32753F845000593D4 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				02C123FD2753FD37000593D4 /* HTMLColors.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		02668A6E271077510023A331 /* SubjectsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectsTableViewController.swift; sourceTree = "<group>"; };
 		027F30A12731636000CAE61B /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		027F30A52731637800CAE61B /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
-		027F30AA2737EB7100CAE61B /* UIColor+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+extensions.swift"; sourceTree = "<group>"; };
 		02828947271DB3AB00C91B40 /* JournalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalCell.swift; sourceTree = "<group>"; };
 		0282898A271DD2A900C91B40 /* CreateAndEditStudentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAndEditStudentViewController.swift; sourceTree = "<group>"; };
 		0282898C271EAE1A00C91B40 /* Journal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Journal.swift; sourceTree = "<group>"; };
@@ -69,6 +90,7 @@
 		028B7BC6270CA34E0028C1B7 /* CreateAndEditJournalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAndEditJournalViewController.swift; sourceTree = "<group>"; };
 		028B7BCA270DB0F00028C1B7 /* StudentsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentsTableViewController.swift; sourceTree = "<group>"; };
 		029E28A4274C276800364813 /* ValueCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueCell.swift; sourceTree = "<group>"; };
+		02C123F32753FD06000593D4 /* HTMLColors.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = HTMLColors.xcodeproj; path = ../HTMLColors/HTMLColors.xcodeproj; sourceTree = "<group>"; };
 		02C45DC12726FDF600ACE6D3 /* JournalModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -77,6 +99,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02C123FC2753FD37000593D4 /* HTMLColors.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -97,14 +120,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		027F30A92737EAC800CAE61B /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				027F30AA2737EB7100CAE61B /* UIColor+extensions.swift */,
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
 		02828949271DB46C00C91B40 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -139,10 +154,12 @@
 		028B7B7E2709C61D0028C1B7 = {
 			isa = PBXGroup;
 			children = (
+				02C123F32753FD06000593D4 /* HTMLColors.xcodeproj */,
 				028B7B892709C61D0028C1B7 /* StudentsJournalApp */,
 				028B7BA02709C6200028C1B7 /* StudentsJournalAppTests */,
 				028B7BAA2709C6200028C1B7 /* StudentsJournalAppUITests */,
 				028B7B882709C61D0028C1B7 /* Products */,
+				02C123FB2753FD37000593D4 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -159,7 +176,6 @@
 		028B7B892709C61D0028C1B7 /* StudentsJournalApp */ = {
 			isa = PBXGroup;
 			children = (
-				027F30A92737EAC800CAE61B /* Extensions */,
 				0282894B271DB49600C91B40 /* Controller */,
 				0282894A271DB48300C91B40 /* View */,
 				02828949271DB46C00C91B40 /* Model */,
@@ -190,6 +206,21 @@
 			path = StudentsJournalAppUITests;
 			sourceTree = "<group>";
 		};
+		02C123F42753FD06000593D4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				02C123F82753FD07000593D4 /* HTMLColors.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		02C123FB2753FD37000593D4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -200,6 +231,7 @@
 				028B7B832709C61D0028C1B7 /* Sources */,
 				028B7B842709C61D0028C1B7 /* Frameworks */,
 				028B7B852709C61D0028C1B7 /* Resources */,
+				02C123B32753F845000593D4 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -281,6 +313,12 @@
 			mainGroup = 028B7B7E2709C61D0028C1B7;
 			productRefGroup = 028B7B882709C61D0028C1B7 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 02C123F42753FD06000593D4 /* Products */;
+					ProjectRef = 02C123F32753FD06000593D4 /* HTMLColors.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				028B7B862709C61D0028C1B7 /* StudentsJournalApp */,
@@ -289,6 +327,16 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		02C123F82753FD07000593D4 /* HTMLColors.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = HTMLColors.framework;
+			remoteRef = 02C123F72753FD07000593D4 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		028B7B852709C61D0028C1B7 /* Resources */ = {
@@ -329,7 +377,6 @@
 				02C45DC22726FDF600ACE6D3 /* JournalModel.swift in Sources */,
 				028B7B8B2709C61D0028C1B7 /* AppDelegate.swift in Sources */,
 				02828948271DB3AB00C91B40 /* JournalCell.swift in Sources */,
-				027F30AB2737EB7100CAE61B /* UIColor+extensions.swift in Sources */,
 				028B7BCB270DB0F00028C1B7 /* StudentsTableViewController.swift in Sources */,
 				0282898B271DD2A900C91B40 /* CreateAndEditStudentViewController.swift in Sources */,
 				028B7B8D2709C61D0028C1B7 /* SceneDelegate.swift in Sources */,

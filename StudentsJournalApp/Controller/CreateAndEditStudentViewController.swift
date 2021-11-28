@@ -1,8 +1,8 @@
 import UIKit
 
 protocol CreateAndEditStudentViewControllerDelegate: AnyObject {
-    func createStudentDidClose(vc: CreateAndEditStudentViewController, didCreate student: Student)
-    func editStudentDidClose(vc: CreateAndEditStudentViewController, student: Student, newFirstName: String, newSecondName: String)
+    func createStudent(vc: CreateAndEditStudentViewController, didCreate student: Student)
+    func editStudent(vc: CreateAndEditStudentViewController, didUpdate student: Student)
 }
 
 final class CreateAndEditStudentViewController: UIViewController {
@@ -40,6 +40,7 @@ final class CreateAndEditStudentViewController: UIViewController {
         let textField = UITextField()
 
         textField.backgroundColor = .white
+        textField.layer.cornerRadius = 6
 
         return textField
     }()
@@ -48,6 +49,7 @@ final class CreateAndEditStudentViewController: UIViewController {
         let textField = UITextField()
 
         textField.backgroundColor = .white
+        textField.layer.cornerRadius = 6
 
         return textField
     }()
@@ -57,7 +59,7 @@ final class CreateAndEditStudentViewController: UIViewController {
             return
         }
 
-        delegate?.createStudentDidClose(vc: self, didCreate: Student(id: UUID().uuidString, firstName: firstName, secondName: secondName, subjects: []))
+        delegate?.createStudent(vc: self, didCreate: Student(id: UUID().uuidString, firstName: firstName, secondName: secondName, subjects: []))
     }
 
     @objc private func editStudent() {
@@ -69,9 +71,12 @@ final class CreateAndEditStudentViewController: UIViewController {
             return
         }
 
-        guard let student = student else { return }
+        guard var student = student else { return }
 
-        delegate?.editStudentDidClose(vc: self, student: student, newFirstName: firstNameText, newSecondName: secondNameText)
+        student.firstName = firstNameText
+        student.secondName = secondNameText
+
+        delegate?.editStudent(vc: self, didUpdate: student)
     }
 
     private func setupViews() {

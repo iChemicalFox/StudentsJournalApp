@@ -1,4 +1,5 @@
 import UIKit
+import HTMLColors
 
 final class StudentsTableViewController: UITableViewController {
     private let shouldShowCloseButton: Bool
@@ -23,7 +24,7 @@ final class StudentsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tableView.backgroundColor = .white
+        tableView.backgroundColor = .init(htmlName: .darkseagreen)
 
         setupNavigationBar()
 
@@ -49,13 +50,17 @@ final class StudentsTableViewController: UITableViewController {
             case 4...5:
                 cell.setValueColor(.green)
             case 3...3.99:
-                cell.setValueColor(.yellow)
+                cell.setValueColor(.orange)
             case 2...2.99:
                 cell.setValueColor(.red)
             default:
                 cell.setValueColor(.gray)
             }
         }
+
+        cell.layer.cornerRadius = 12
+        cell.layer.borderWidth = 0.15
+        cell.layer.borderColor = UIColor.gray.cgColor
 
         return cell
     }
@@ -111,7 +116,7 @@ final class StudentsTableViewController: UITableViewController {
                                             title: NSLocalizedString("Edit", comment: "")) { [weak self, journalModel, journalId] (action, view, handler) in
             let students = journalModel.getStudents(journalId: journalId)
             let student = students[indexPath.row]
-            self?.editStudent(student: student)
+            self?.edit(student: student)
         }
 
         editAction.backgroundColor = .gray
@@ -138,7 +143,7 @@ final class StudentsTableViewController: UITableViewController {
         }
     }
 
-    private func editStudent(student: Student) {
+    private func edit(student: Student) {
         let viewController = CreateAndEditStudentViewController(student: student)
         let navigationController = UINavigationController(rootViewController: viewController)
 
@@ -158,14 +163,14 @@ final class StudentsTableViewController: UITableViewController {
 // MARK: StudentsTableViewController + CreateStudentViewControllerDelegate
 
 extension StudentsTableViewController: CreateAndEditStudentViewControllerDelegate {
-    func editStudentDidClose(vc: CreateAndEditStudentViewController, student: Student, newFirstName: String, newSecondName: String) {
-        journalModel.editStudent(student: student, journalId: journalId, newFirstName: newFirstName, newSecondName: newSecondName)
+    func editStudent(vc: CreateAndEditStudentViewController, didUpdate student: Student) {
+        journalModel.edit(student: student, journalId: journalId)
 
         tableView.reloadData()
         vc.dismiss(animated: true, completion: nil)
     }
 
-    func createStudentDidClose(vc: CreateAndEditStudentViewController, didCreate student: Student) {
+    func createStudent(vc: CreateAndEditStudentViewController, didCreate student: Student) {
         journalModel.add(student: student, for: journalId)
         
         tableView.reloadData()

@@ -1,4 +1,5 @@
 import UIKit
+import HTMLColors
 
 final class JournalTableViewController: UITableViewController {
     private let shouldShowCloseButton: Bool
@@ -19,7 +20,7 @@ final class JournalTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tableView.backgroundColor = .white
+        tableView.backgroundColor = .init(htmlName: .darkseagreen)
 
         setupNavigationBar()
 
@@ -35,6 +36,10 @@ final class JournalTableViewController: UITableViewController {
         if !groups.isEmpty {
             cell.textLabel?.text = groups[indexPath.row].groupName
         }
+
+        cell.layer.cornerRadius = 12
+        cell.layer.borderWidth = 0.15
+        cell.layer.borderColor = UIColor.gray.cgColor
 
         return cell
     }
@@ -134,15 +139,15 @@ final class JournalTableViewController: UITableViewController {
 // MARK: JournalTableViewController + CreateJournalViewControllerDelegate
 
 extension JournalTableViewController: CreateAndEditJournalViewControllerDelegate {
-    func createJournalDidClose(vc: CreateAndEditJournalViewController, didCreate journal: Journal) {
+    func createJournal(vc: CreateAndEditJournalViewController, didCreate journal: Journal) {
         journalModel.add(journal: journal)
 
         tableView.reloadData()
         vc.dismiss(animated: true, completion: nil)
     }
 
-    func editJournalNameDidClose(vc: CreateAndEditJournalViewController, journal: Journal, newName: String) {
-        journalModel.editGroupName(journal: journal, newValue: newName)
+    func editJournalName(vc: CreateAndEditJournalViewController, didUpdate journal: Journal) {
+        journalModel.editGroupName(journal: journal)
 
         tableView.reloadData()
         vc.dismiss(animated: true, completion: nil)

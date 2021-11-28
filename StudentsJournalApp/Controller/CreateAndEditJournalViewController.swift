@@ -1,8 +1,8 @@
 import UIKit
 
 protocol CreateAndEditJournalViewControllerDelegate: AnyObject {
-    func createJournalDidClose(vc: CreateAndEditJournalViewController, didCreate journal: Journal)
-    func editJournalNameDidClose(vc: CreateAndEditJournalViewController, journal: Journal, newName: String)
+    func createJournal(vc: CreateAndEditJournalViewController, didCreate journal: Journal)
+    func editJournalName(vc: CreateAndEditJournalViewController, didUpdate journal: Journal)
 }
 
 final class CreateAndEditJournalViewController: UIViewController {
@@ -39,6 +39,7 @@ final class CreateAndEditJournalViewController: UIViewController {
         let textField = UITextField()
 
         textField.backgroundColor = .white
+        textField.layer.cornerRadius = 6
 
         return textField
     }()
@@ -48,13 +49,15 @@ final class CreateAndEditJournalViewController: UIViewController {
             return
         }
 
-        delegate?.createJournalDidClose(vc: self, didCreate: Journal(id: UUID().uuidString, groupName: text, students: []))
+        delegate?.createJournal(vc: self, didCreate: Journal(id: UUID().uuidString, groupName: text, students: []))
     }
 
     @objc private func editJournalName() {
-        guard let text = textField.text, let journal = journal else { return }
+        guard let text = textField.text, var journal = journal else { return }
 
-        delegate?.editJournalNameDidClose(vc: self, journal: journal, newName: text)
+        journal.groupName = text
+
+        delegate?.editJournalName(vc: self, didUpdate: journal)
     }
 
     private func setupViews() {

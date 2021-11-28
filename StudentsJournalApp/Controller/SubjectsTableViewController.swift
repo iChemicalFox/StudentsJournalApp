@@ -1,4 +1,5 @@
 import UIKit
+import HTMLColors
 
 final class SubjectsTableViewController: UITableViewController {
     private let shouldShowCloseButton: Bool
@@ -22,7 +23,7 @@ final class SubjectsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tableView.backgroundColor = .white
+        tableView.backgroundColor = .init(htmlName: .darkseagreen)
 
         setupNavigationBar()
 
@@ -41,6 +42,10 @@ final class SubjectsTableViewController: UITableViewController {
                 value: subjects[indexPath.row].grade.description
             )
         }
+
+        cell.layer.cornerRadius = 12
+        cell.layer.borderWidth = 0.15
+        cell.layer.borderColor = UIColor.gray.cgColor
 
         return cell
     }
