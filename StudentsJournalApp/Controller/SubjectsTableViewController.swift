@@ -36,7 +36,7 @@ final class SubjectsTableViewController: UITableViewController {
 
         let subjects = journalModel.getSubjects(studentId: studentId, journalId: journalId)
 
-        if !subjects.isEmpty {
+        if !subjects.isEmpty && subjects.count >= indexPath.row {
             cell.render(
                 title: subjects[indexPath.row].name,
                 value: subjects[indexPath.row].grade.description

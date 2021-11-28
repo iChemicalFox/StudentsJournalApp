@@ -33,7 +33,7 @@ final class JournalTableViewController: UITableViewController {
 
         let groups = journalModel.journals
 
-        if !groups.isEmpty {
+        if !groups.isEmpty && groups.count >= indexPath.row {
             cell.textLabel?.text = groups[indexPath.row].groupName
         }
 
@@ -60,8 +60,12 @@ final class JournalTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let groups = journalModel.journals
-        
-        let groupId = groups[indexPath.row].id // не исключен фатал
+
+        if groups.count <= indexPath.row {
+            assertionFailure("cells more than groups")
+        }
+
+        let groupId = groups[indexPath.row].id
 
         let destination = StudentsTableViewController(shouldShowCloseButton: false, journalId: groupId)
         navigationController?.pushViewController(destination, animated: true)

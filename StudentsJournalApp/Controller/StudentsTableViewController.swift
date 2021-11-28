@@ -36,8 +36,12 @@ final class StudentsTableViewController: UITableViewController {
         // в prepare for reuse отправлять пустую ячейку
 
         let students = journalModel.getStudents(journalId: journalId)
-        let studentId = students[indexPath.row].id
 
+        if students.count <= indexPath.row {
+            assertionFailure("cells more than students")
+        }
+
+        let studentId = students[indexPath.row].id
         let averageRate = journalModel.getAverageRate(studentId: studentId, journalId: journalId)
 
         if !students.isEmpty {
@@ -81,10 +85,14 @@ final class StudentsTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let students = journalModel.getStudents(journalId: journalId)
-        
-        let studentId = students[indexPath.row].id // не исключен фатал
 
+        if students.count <= indexPath.row {
+            assertionFailure("cells more than staudents")
+        }
+
+        let studentId = students[indexPath.row].id
         let destination = SubjectsTableViewController(shouldShowCloseButton: false, journalId: journalId, studentId: studentId)
+
         navigationController?.pushViewController(destination, animated: true)
     }
 
