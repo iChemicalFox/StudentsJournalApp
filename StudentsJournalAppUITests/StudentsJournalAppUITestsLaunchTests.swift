@@ -1,10 +1,3 @@
-//
-//  StudentsJournalAppUITestsLaunchTests.swift
-//  StudentsJournalAppUITests
-//
-//  Created by Алексей Слоневский on 18.10.2021.
-//
-
 import XCTest
 
 class StudentsJournalAppUITestsLaunchTests: XCTestCase {

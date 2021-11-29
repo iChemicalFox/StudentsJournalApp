@@ -1,10 +1,3 @@
-//
-//  StudentsJournalAppTests.swift
-//  StudentsJournalAppTests
-//
-//  Created by Алексей Слоневский on 18.10.2021.
-//
-
 import XCTest
 @testable import StudentsJournalApp
 

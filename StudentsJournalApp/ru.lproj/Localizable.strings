@@ -1,0 +1,17 @@
+"Delete" = "Удалить";
+"Edit" = "Изменить";
+"Journals" = "Журналы";
+"Group" = "Группа";
+"Create journal" = "Добавить журнал";
+"Create student" = "Добавить студента";
+"Create subject" = "Добавить предмет";
+"Write the group number" = "Напишите номер группы";
+"Write the first name" = "Напишите имя";
+"Write the second name" = "Напишите фамилию";
+"Write the subject's name" = "Напишите название предмета";
+"Write the subject's rating" = "Напишите оценку";
+"Edit group" = "Редактирование группы";
+"Update" = "Изменить";
+"Cancel" = "Отмена";
+"Edit student" = "Редактирование студента";
+"Unknown student" = "Неизвестный студент";
