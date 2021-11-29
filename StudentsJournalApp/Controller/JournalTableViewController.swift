@@ -24,11 +24,11 @@ final class JournalTableViewController: UITableViewController {
 
         setupNavigationBar()
 
-        tableView.register(JournalCell.self, forCellReuseIdentifier: "\(JournalCell.self)")
+        tableView.register(JournalCell.self)
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "\(JournalCell.self)", for: indexPath) as! JournalCell
+        let cell = tableView.dequeueReusableCell(JournalCell.self, for: indexPath)
         // в prepare for reuse отправлять пустую ячейку
 
         let groups = journalModel.journals

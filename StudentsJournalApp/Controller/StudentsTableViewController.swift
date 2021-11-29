@@ -28,11 +28,11 @@ final class StudentsTableViewController: UITableViewController {
 
         setupNavigationBar()
 
-        tableView.register(ValueCell.self, forCellReuseIdentifier: "\(ValueCell.self)")
+        tableView.register(ValueCell.self)
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "\(ValueCell.self)", for: indexPath) as! ValueCell
+        let cell = tableView.dequeueReusableCell(ValueCell.self, for: indexPath)
         // в prepare for reuse отправлять пустую ячейку
 
         let students = journalModel.getStudents(journalId: journalId)

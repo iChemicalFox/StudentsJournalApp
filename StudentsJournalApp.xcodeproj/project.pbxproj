@@ -26,6 +26,7 @@
 		029E28A5274C276800364813 /* ValueCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029E28A4274C276800364813 /* ValueCell.swift */; };
 		02C123FC2753FD37000593D4 /* HTMLColors.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02C123F82753FD07000593D4 /* HTMLColors.framework */; };
 		02C123FD2753FD37000593D4 /* HTMLColors.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 02C123F82753FD07000593D4 /* HTMLColors.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		02C1240027540AC8000593D4 /* UITableView+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C123FF27540AC8000593D4 /* UITableView+extensions.swift */; };
 		02C45DC22726FDF600ACE6D3 /* JournalModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C45DC12726FDF600ACE6D3 /* JournalModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -91,6 +92,7 @@
 		028B7BCA270DB0F00028C1B7 /* StudentsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentsTableViewController.swift; sourceTree = "<group>"; };
 		029E28A4274C276800364813 /* ValueCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueCell.swift; sourceTree = "<group>"; };
 		02C123F32753FD06000593D4 /* HTMLColors.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = HTMLColors.xcodeproj; path = ../HTMLColors/HTMLColors.xcodeproj; sourceTree = "<group>"; };
+		02C123FF27540AC8000593D4 /* UITableView+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+extensions.swift"; sourceTree = "<group>"; };
 		02C45DC12726FDF600ACE6D3 /* JournalModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -176,6 +178,7 @@
 		028B7B892709C61D0028C1B7 /* StudentsJournalApp */ = {
 			isa = PBXGroup;
 			children = (
+				02C123FE27540909000593D4 /* Extensions */,
 				0282894B271DB49600C91B40 /* Controller */,
 				0282894A271DB48300C91B40 /* View */,
 				02828949271DB46C00C91B40 /* Model */,
@@ -219,6 +222,14 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		02C123FE27540909000593D4 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				02C123FF27540AC8000593D4 /* UITableView+extensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -372,6 +383,7 @@
 			files = (
 				028B7B8F2709C61D0028C1B7 /* JournalTableViewController.swift in Sources */,
 				028289952721A37900C91B40 /* CreateSubjectViewController.swift in Sources */,
+				02C1240027540AC8000593D4 /* UITableView+extensions.swift in Sources */,
 				028B7BC7270CA34E0028C1B7 /* CreateAndEditJournalViewController.swift in Sources */,
 				029E28A5274C276800364813 /* ValueCell.swift in Sources */,
 				02C45DC22726FDF600ACE6D3 /* JournalModel.swift in Sources */,
